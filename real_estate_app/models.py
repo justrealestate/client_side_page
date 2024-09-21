@@ -27,6 +27,7 @@ class Land(models.Model):
     Type = models.CharField(max_length=10)
     PrimaryNumber = models.CharField(max_length=20, unique=False)
     SecondaryNumber = models.CharField(max_length=20, unique=False)
+    Image = models.ImageField(upload_to='images/land')
     Uploaded_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -48,6 +49,7 @@ class LandRent(models.Model):
     Terms = models.CharField(max_length=500)
     PrimaryNumber = models.CharField(max_length=20, unique=False)
     SecondaryNumber = models.CharField(max_length=20, unique=False)
+    Image = models.ImageField(upload_to='images/landrent/')
     Uploaded_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

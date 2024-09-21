@@ -2,10 +2,12 @@
 {% load static %}
 
 {% block content %}
+<title>Residential Rent Form</title>
 <link rel="stylesheet" href="{% static 'css/s.css' %}">
+<script src="jquery-3.6.0.min.js"></script>
 <script src="{% static 'js/residential_rent.js' %}"></script>
 <div class="container">
-    <form class="form">
+    <form class="form" action="residential_rent_create" method="post">
         <h3 class="alert alert-warning">Residential Rent</h3>
          
        <!-- Property Details Start -->
@@ -261,20 +263,36 @@
                 <hr>
 
                 <h4 class="alert alert-primary">Upload Images</h4>
-                <div class="input-group mb-3">
-                    <input type="file" class="form-control" id="inputGroupFile02" multiple hidden>
-                    <label class="input-group-text btn btn-outline-primary" for="inputGroupFile02">Choose Images</label>
-                </div>
-            
-                <button id="addImagesButton" class="btn btn-primary w-100">Add Images</button>
-            
-                <div id="imageContainer" class="d-flex flex-wrap justify-content-start align-items-center gap-3 mt-4"></div>
-                
+                    <div class="input-group mb-3">
+                        <input type="file" class="form-control" name="Images" id="inputGroupFile02" accept="image/*" multiple hidden>
+                        <label class="input-group-text btn btn-outline-primary" for="inputGroupFile02">Choose Images</label>
+                    </div>
+
+                    <button id="addImagesButton" class="btn btn-primary w-100">Add Images</button>
+
+                    <div id="imageContainer" class="d-flex flex-wrap justify-content-start align-items-center gap-3 mt-4"></div>
                 <hr>
+                    
+                     <!-- Modal for Zooming the Image -->
+                    <div class="modal fade" id="zoomModal" tabindex="-1" aria-labelledby="zoomModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="zoomModalLabel">Zoomed Image</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body text-center">
+                            <img id="zoomedImage" src="" class="img-fluid" alt="Zoomed Image">
+                            </div>
+                        </div>
+                        </div>
+                    </div>
 
                 <h4 class="alert alert-primary">Upload Videos</h4>
                 <div class="input-group mb-3">
-                    <input type="file" class="form-control" id="inputGroupFile02" multiple hidden>
+                    <input type="file" class="form-control" name="Videos" id="inputGroupFile02" accept="video/*" multiple hidden>
                     <label class="input-group-text btn btn-outline-primary" for="inputGroupFile02">Choose Videos</label>
                 </div>
             
@@ -311,4 +329,6 @@
         
     </form>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {% endblock %}

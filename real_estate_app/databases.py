@@ -1,51 +1,56 @@
 from django.shortcuts import render,redirect
 from .models import *
+import datetime
+
+x = datetime.datetime.now()
 
 def land_rent_create(request):  
     if request.method == 'POST':
         land_rent = LandRent(
-            Email = request.session['emailId'],
-            Length=request.POST['Length'], 
-            Width = request.POST['Width'],
-            PlotArea = request.POST['PlotArea'],
-            Cent = request.POST['Cent'],
-            Acre = request.POST['Acre'],
-            District = request.POST['District'],
-            Town = request.POST['Town'],
-            Street = request.POST['Street'],
-            ExpectedRent = request.POST['ExpectedRent'],
-            ExpectedDepositMonths = request.POST['ExpectedDepositMonths'],
-            ExpectedDeposit = request.POST['ExpectedDeposit'],
-            Terms = request.POST['Terms'],
-            PrimaryNumber = request.POST['PrimaryNumber'],
-            SecondaryNumber = request.POST['SecondaryNumber']
-        )
+                Email = request.session['email'],
+                Length = request.POST['Length'], 
+                Width = request.POST['Width'],
+                PlotArea = request.POST['PlotArea'],
+                Cent = request.POST['Cent'],
+                Acre = request.POST['Acre'],
+                District = request.POST['District'],
+                Town = request.POST['Town'],
+                Street = request.POST['Street'],
+                ExpectedRent = request.POST['ExpectedRent'],
+                ExpectedDepositMonths = request.POST['ExpectedDepositMonths'],
+                ExpectedDeposit = request.POST['ExpectedDeposit'],
+                Terms = request.POST['Terms'],
+                PrimaryNumber = request.POST['PrimaryNumber'],
+                SecondaryNumber = request.POST['SecondaryNumber'],
+                Image = request.POST['Images']
+            )
         land = Land(
-            Email = request.session['emailId'],
-            Length=request.POST['Length'], 
-            Width = request.POST['Width'],
-            PlotArea = request.POST['PlotArea'],
-            Cent = request.POST['Cent'],
-            Acre = request.POST['Acre'],
-            District = request.POST['District'],
-            Town = request.POST['Town'],
-            Street = request.POST['Street'],
-            ExpectedRent = request.POST['ExpectedRent'],
-            ExpectedDepositMonths = request.POST['ExpectedDepositMonths'],
-            ExpectedDeposit = request.POST['ExpectedDeposit'],
-            Terms = request.POST['Terms'],
-            Type = 'Rent',
-            PrimaryNumber = request.POST['PrimaryNumber'],
-            SecondaryNumber = request.POST['SecondaryNumber']
-        )
+                Email = request.session['email'],
+                Length=request.POST['Length'], 
+                Width = request.POST['Width'],
+                PlotArea = request.POST['PlotArea'],
+                Cent = request.POST['Cent'],
+                Acre = request.POST['Acre'],
+                District = request.POST['District'],
+                Town = request.POST['Town'],
+                Street = request.POST['Street'],
+                ExpectedRent = request.POST['ExpectedRent'],
+                ExpectedDepositMonths = request.POST['ExpectedDepositMonths'],
+                ExpectedDeposit = request.POST['ExpectedDeposit'],
+                Terms = request.POST['Terms'],
+                Type = 'Rent',
+                PrimaryNumber = request.POST['PrimaryNumber'],
+                SecondaryNumber = request.POST['SecondaryNumber'],
+                Image = request.POST['Images']
+            )
         land_rent.save()
         land.save()
-        return redirect('index')
+        return redirect('profile')
     
 def land_resale_create(request):
     if request.method == 'POST':
         land_resale = LandResale(
-            Email = request.session['emailId'],
+            Email = request.session['email'],
             Length = request.POST['Length'], 
             Width = request.POST['Width'],
             PlotArea = request.POST['PlotArea'],
@@ -63,7 +68,7 @@ def land_resale_create(request):
         )
 
         land = Land(
-            Email = request.session['emailId'],
+            Email = request.session['email'],
             Length = request.POST['Length'], 
             Width = request.POST['Width'],
             PlotArea = request.POST['PlotArea'],
@@ -88,7 +93,7 @@ def land_resale_create(request):
 def land_lease_create(request):
     if request.method == 'POST':
         land_lease = LandLease(
-            Email = request.session['emailId'],
+            Email = request.session['email'],
             Length=request.POST['Length'], 
             Width = request.POST['Width'],
             PlotArea = request.POST['PlotArea'],
@@ -106,7 +111,7 @@ def land_lease_create(request):
         )
 
         land = Land(
-            Email = request.session['emailId'],
+            Email = request.session['email'],
             Length=request.POST['Length'], 
             Width = request.POST['Width'],
             PlotArea = request.POST['PlotArea'],
@@ -130,7 +135,8 @@ def land_lease_create(request):
 def residential_rent_create(request):
     if request.method == 'POST':
         residential_rent = ResidentialRent(
-            Email = request.session['emailId'],
+            PropertyId = 'RRENT',
+            Email = request.session['email'],
             BhkType = request.POST['BhkType'],
             Floor = request.POST['Floor'],
             HouseType = request.POST['HouseType'],
@@ -152,7 +158,7 @@ def residential_rent_create(request):
             SecondaryNumber = request.POST['SecondaryNumber']
         )
         residential = Residential(
-            Email = request.session['emailId'],
+            Email = request.session['email'],
             BhkType = request.POST['BhkType'],
             Floor = request.POST['Floor'],
             HouseType = request.POST['HouseType'],
@@ -176,13 +182,13 @@ def residential_rent_create(request):
         )
         residential.save()
         residential_rent.save()
-        return redirect('/')
+        return redirect('profile')
     
 
 def residential_resale_create(request):
     if request.method == 'POST':
         residential_resale = ResidentialResale(
-            Email = request.session['emailId'],
+            Email = request.session['email'],
             BhkType = request.POST['BhkType'],
             TotalFloor = request.POST['TotalFloor'],
             PropertyAge = request.POST['PropertyAge'],
@@ -208,7 +214,7 @@ def residential_resale_create(request):
             SecondaryNumber = request.POST['SecondaryNumber']
         )
         residential = Residential(
-            Email = request.session['emailId'],
+            Email = request.session['email'],
             BhkType = request.POST['BhkType'],
             TotalFloor = request.POST['TotalFloor'],
             PropertyAge = request.POST['PropertyAge'],
@@ -241,7 +247,7 @@ def residential_resale_create(request):
 def residential_lease_create(request):
     if request.method == "POST":
         residential_lease = ResidentialLease(
-            Email = request.session['emailId'],
+            Email = request.session['email'],
             BhkType = request.POST['BhkType'],
             Floor = request.POST['Floor'],
             HouseType = request.POST['HouseType'],
@@ -261,7 +267,7 @@ def residential_lease_create(request):
             SecondaryNumber = request.POST['SecondaryNumber']
         )
         residential = Residential(
-            Email = request.session['emailId'],
+            Email = request.session['email'],
             BhkType = request.POST['BhkType'],
             Floor = request.POST['Floor'],
             HouseType = request.POST['HouseType'],
