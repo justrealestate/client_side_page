@@ -20,6 +20,7 @@ urlpatterns = [
     path('data_processing',views.data_processing,name='data_processing'),
     path('logout',session.logout,name='logout'),
     path('payment_gateway/',include('real_estate_app.urls_payment_gateway')),
+    path('o',views.o,name='o'),
 
 
     #admin

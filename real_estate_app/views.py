@@ -75,3 +75,6 @@ def land_rent_form(request):
 
 def login(request):
     return render(request,"login.html")
+
+def o(request):
+    return render(request,'o.html')

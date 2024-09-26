@@ -1,148 +1,129 @@
+// const imageInput = document.getElementById('Images');
+// const imagePreview = document.getElementById('imagePreview');
 
-        let filesArray = [];
+// // Handle file input change
+// imageInput.addEventListener('change', function () {
+//   const files = imageInput.files;
+//   imagePreview.innerHTML = ''; // Clear previous previews
 
-        // Trigger file input when the button is clicked
-        $('#addImagesButton').on('click', function () {
-            $('#inputGroupFile02').click();
-        });
+//   if (files.length > 0) {
+//     for (let i = 0; i < files.length; i++) {
+//       const file = files[i];
 
-        // jQuery event listener for file input change
-        $('#inputGroupFile02').on('change', function () {
-            const selectedFiles = Array.from(this.files);
-            
-            // Add selected files to filesArray and display images
-            selectedFiles.forEach(function (file) {
-                filesArray.push(file);
-                displayImage(file);
-            });
+//       // Check if the file is an image
+//       if (!file.type.startsWith('image/')) {
+//         alert("Please select only images.");
+//         continue;
+//       }
 
-            // Reset the input after selection to avoid duplicate issues
-            $('#inputGroupFile02').val('');
-        });
+//       const reader = new FileReader();
+//       reader.onload = function (e) {
+//         const img = document.createElement('img');
+//         img.src = e.target.result;
+//         img.alt = file.name;
+//         img.style.width = '150px'; // Set size
+//         img.style.margin = '10px'; // Space between images
 
-        // Function to display selected images
-        function displayImage(file) {
-            const reader = new FileReader();
-            
-            reader.onload = function (e) {
-                const imageWrapper = $('<div>').addClass('image-wrapper').css('position', 'relative');
-
-                const img = $('<img>').attr('src', e.target.result)
-                                      .addClass('img-thumbnail')
-                                      .css({ width: '100px', height: '100px', objectFit: 'cover' })
-                                      .attr('alt', file.name);
-
-                const deleteBtn = $('<button>').text('Delete').addClass('btn btn-danger btn-sm m-2');
-
-                const zoomBtn = $('<button>').text('Zoom').addClass('btn btn-info btn-sm m-2');
-
-                // Handle the delete action
-                deleteBtn.on('click', function () {
-                    filesArray = filesArray.filter(f => f !== file);
-                    imageWrapper.remove();
-                    updateInputFiles();
-                });
-
-                // Handle the zoom action
-                zoomBtn.on('click', function () {
-                    $('#zoomedImage').attr('src', e.target.result);
-                    $('#zoomModal').modal('show');
-                });
-
-                imageWrapper.append(img).append(deleteBtn).append(zoomBtn);
-                $('#imageContainer').append(imageWrapper);
-            };
-
-            reader.readAsDataURL(file);
-        }
-
-        // Update the input file list after deletion
-        function updateInputFiles() {
-            const dataTransfer = new DataTransfer();
-
-            filesArray.forEach(function (file) {
-                dataTransfer.items.add(file);
-            });
-
-            document.getElementById('inputGroupFile02').files = dataTransfer.files;
-        }
+//         imagePreview.appendChild(img);
+//       };
+//       reader.readAsDataURL(file);
+//     }
+//   } else {
+//     alert("No files selected.");
+//   }
+// });
 
 
-function RentCalculator(){
-    let ExpectedRent = parseInt(document.getElementById('ExpectedRent').value);
-    let ExpectedDepositMonths = parseInt(document.getElementById('ExpectedDepositMonths').value);
-    document.getElementById('ExpectedDeposit').value = ExpectedRent * ExpectedDepositMonths;
-    
+
+function RentCalculator() {
+  let ExpectedRent = parseInt(document.getElementById('ExpectedRent').value);
+  let ExpectedDepositMonths = parseInt(document.getElementById('ExpectedDepositMonths').value);
+  document.getElementById('ExpectedDeposit').value = ExpectedRent * ExpectedDepositMonths;
+
 }
 
-function ResidentialRentCreate(){
-    let BhkType = document.getElementById('BhkType').value;
-    let Floor = document.getElementById('Floor').value;
-    let HouseType = document.getElementById('HouseType').value;
-    let Parking = document.getElementById('Parking').value;
-    let Terrace = document.getElementById('Terrace').value;
-    let Hall = document.getElementById('Hall').value;
-    let Bedroom = document.getElementById('Bedroom').value;
-    let Bathroom = document.getElementById('Bathroom').value;
-    let District = document.getElementById('District').value;
-    let Town = document.getElementById('Town').value;
-    let Street = document.getElementById('Street').value;
-    let ExpectedRent = document.getElementById('ExpectedRent').value;
-    let ExpectedDepositMonths = document.getElementById('ExpectedDepositMonths').value;
-    let ExpectedDeposit = document.getElementById('ExpectedDeposit').value;
-    let Maintenance = document.getElementById('Maintenance').value;
-    let PreferredTenants = document.getElementById('PreferredTenants').value;
-    let Terms = document.getElementById('Terms').value;
-    let PrimaryNumber = document.getElementById('PrimaryNumber').value;
-    let SecondaryNumber = document.getElementById('SecondaryNumber').value;
+function ResidentialRentCreate() {
+  // Get form values
+  let BhkType = document.getElementById('BhkType').value;
+  let Floor = document.getElementById('Floor').value;
+  let HouseType = document.getElementById('HouseType').value;
+  let Parking = document.getElementById('Parking').value;
+  let Terrace = document.getElementById('Terrace').value;
+  let Hall = document.getElementById('Hall').value;
+  let Bedroom = document.getElementById('Bedroom').value;
+  let Bathroom = document.getElementById('Bathroom').value;
+  let District = document.getElementById('District').value;
+  let Town = document.getElementById('Town').value;
+  let Street = document.getElementById('Street').value;
+  let ExpectedRent = document.getElementById('ExpectedRent').value;
+  let ExpectedDepositMonths = document.getElementById('ExpectedDepositMonths').value;
+  let ExpectedDeposit = document.getElementById('ExpectedDeposit').value;
+  let Maintenance = document.getElementById('Maintenance').value;
+  let PreferredTenants = document.getElementById('PreferredTenants').value;
+  let Terms = document.getElementById('Terms').value;
+  let PrimaryNumber = document.getElementById('PrimaryNumber').value;
+  let SecondaryNumber = document.getElementById('SecondaryNumber').value;
 
-    if(BhkType == "" || Floor == "" || HouseType == "" || Parking == "" || Terrace == "" || Hall == "" ||
-        Bedroom == "" || Bathroom == "" || District == "" || Town == "" || Street == "" ||
-        ExpectedRent == "" || ExpectedDepositMonths == "" || ExpectedDeposit == "" || Maintenance == "" || PreferredTenants == "" || Terms == "" ||
-        PrimaryNumber == "" || SecondaryNumber == ""){
+  // Create FormData object
+  let formData = new FormData();
+  formData.append('BhkType', BhkType);
+  formData.append('Floor', Floor);
+  formData.append('HouseType', HouseType);
+  formData.append('Parking', Parking);
+  formData.append('Terrace', Terrace);
+  formData.append('Hall', Hall);
+  formData.append('Bedroom', Bedroom);
+  formData.append('Bathroom', Bathroom);
+  formData.append('District', District);
+  formData.append('Town', Town);
+  formData.append('Street', Street);
+  formData.append('ExpectedRent', ExpectedRent);
+  formData.append('ExpectedDepositMonths', ExpectedDepositMonths);
+  formData.append('ExpectedDeposit', ExpectedDeposit);
+  formData.append('Maintenance', Maintenance);
+  formData.append('PreferredTenants', PreferredTenants);
+  formData.append('Terms', Terms);
+  formData.append('PrimaryNumber', PrimaryNumber);
+  formData.append('SecondaryNumber', SecondaryNumber);
 
-        alert("Please fill the Required Fields");
+  // Append CSRF token
+  formData.append('csrfmiddlewaretoken', $('input[name="csrfmiddlewaretoken"]').val());
+
+  // Append files if selected
+  let images = $('#Images')[0].files;
+  if (images.length > 0) {
+    for (let i = 0; i < images.length; i++) {
+      formData.append('images', images[i]);
     }
-    // else{
-    //     $.ajax({
-    //         url : 'residential_rent_create/',
-    //         type : 'POST',
-    //         data : {
-    //             BhkType : BhkType,
-    //             Floor : Floor,
-    //             HouseType : HouseType,
-    //             Parking : Parking,
-    //             Terrace : Terrace,
-    //             Hall : Hall,
-    //             Bedroom : Bedroom,
-    //             Bathroom : Bathroom,
-    //             District : District,
-    //             Town : Town,
-    //             Street : Street,
-    //             ExpectedRent : ExpectedRent,
-    //             ExpectedDepositMonths : ExpectedDepositMonths,
-    //             ExpectedDeposit : ExpectedDeposit,
-    //             Maintenance : Maintenance,
-    //             PreferredTenants : PreferredTenants,
-    //             Terms : Terms,
-    //             PrimaryNumber : PrimaryNumber,
-    //             SecondaryNumber : SecondaryNumber,
-    //             csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val()
-    //         },
-    //         success:function(){
-    //             alert("Your Property is Posted Successfully😊");
-    //             window.location.href = "{% url 'index' %}"; 
+  }
 
-    //         },
-    //         error:function(){
-    //             alert("Sorry something went Wrong😖");
-    //         }
-           
-    //     });
-    // }
-    // alert('Processing....');
+  let videos = $('#Videos')[0].files;
+  if (videos.length > 0) {
+    for (let i = 0; i < videos.length; i++) {
+      formData.append('videos', videos[i]);
+    }
+  }
 
+  // Validate form fields
+  if (BhkType === "" || Floor === "" || HouseType === "" || Parking === "" || Terrace === "" || Hall === "" ||
+    Bedroom === "" || Bathroom === "" || District === "" || Town === "" || Street === "" ||
+    ExpectedRent === "" || ExpectedDepositMonths === "" || ExpectedDeposit === "" || Maintenance === "" ||
+    PreferredTenants === "" || Terms === "" || PrimaryNumber === "" || SecondaryNumber === "") {
+    alert("Please fill all the required fields.");
+  } else {
+    // Submit the form data via AJAX
+    $.ajax({
+      url: 'residential_rent_create/',  // Adjust URL as needed
+      type: 'POST',
+      data: formData,
+      processData: false,  // Important for file uploads
+      contentType: false,  // Important for file uploads
+      success: function() {
+        alert('Uploaded successfully!');
+      },
+      error: function() {
+        alert('Error uploading data.');
+      }
+    });
+  }
 }
-
-
-

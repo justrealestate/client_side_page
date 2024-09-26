@@ -27,7 +27,8 @@ class Land(models.Model):
     Type = models.CharField(max_length=10)
     PrimaryNumber = models.CharField(max_length=20, unique=False)
     SecondaryNumber = models.CharField(max_length=20, unique=False)
-    Image = models.ImageField(upload_to='images/land')
+    Image = models.ImageField(upload_to='images/land/land_records',null=True)
+    Video = models.FileField(upload_to='videos/land/land_records',null=True)
     Uploaded_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -49,7 +50,8 @@ class LandRent(models.Model):
     Terms = models.CharField(max_length=500)
     PrimaryNumber = models.CharField(max_length=20, unique=False)
     SecondaryNumber = models.CharField(max_length=20, unique=False)
-    Image = models.ImageField(upload_to='images/landrent/')
+    Image = models.ImageField(upload_to='images/land/land_rent',null=True)
+    Video = models.FileField(upload_to='videos/land/land_rent',null=True)
     Uploaded_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -71,6 +73,8 @@ class LandResale(models.Model):
     Description = models.CharField(max_length=500)
     PrimaryNumber = models.CharField(max_length=20, unique=False)
     SecondaryNumber = models.CharField(max_length=20, unique=False)
+    Image = models.ImageField(upload_to='images/land/land_resale',null=True)
+    Video = models.FileField(upload_to='videos/land/land_resale',null=True)
     Uploaded_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -92,6 +96,8 @@ class LandLease(models.Model):
     Terms = models.CharField(max_length=500)
     PrimaryNumber = models.CharField(max_length=20, unique=False)
     SecondaryNumber = models.CharField(max_length=20, unique=False)
+    Image = models.ImageField(upload_to='images/land/land_lease',null=True)
+    Video = models.FileField(upload_to='videos/land/land_lease',null=True)
     Uploaded_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -133,6 +139,8 @@ class Residential(models.Model):
     Type = models.CharField(max_length=10)
     PrimaryNumber = models.CharField(max_length=20, unique=False)
     SecondaryNumber = models.CharField(max_length=20, unique=False)
+    Image = models.ImageField(upload_to='images/residential/residential_records',null=True)
+    Video = models.FileField(upload_to='videos/residential/residential_records',null=True)
     Created_at = models.DateTimeField(default=timezone.now)
     class Meta:
         db_table = "residential_records"
@@ -158,6 +166,8 @@ class ResidentialRent(models.Model):
     Terms = models.CharField(max_length=1000)
     PrimaryNumber = models.CharField(max_length=20, unique=False)
     SecondaryNumber = models.CharField(max_length=20, unique=False)
+    Image = models.ImageField(upload_to='images/residential/residential_rent',null=True)
+    Video = models.FileField(upload_to='videos/residential/residential_rent',null=True)
     Created_at = models.DateTimeField(default=timezone.now)
     
 
@@ -192,6 +202,8 @@ class ResidentialResale(models.Model):
     Description = models.CharField(max_length=50)
     PrimaryNumber = models.CharField(max_length=20, unique=False)
     SecondaryNumber = models.CharField(max_length=20, unique=False)
+    Image = models.ImageField(upload_to='images/residential/residential_resale',null=True)
+    Video = models.FileField(upload_to='videos/residential/residential_resale',null=True)
     Created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -216,6 +228,8 @@ class ResidentialLease(models.Model):
     Terms = models.CharField(max_length=1000)
     PrimaryNumber = models.CharField(max_length=20, unique=False)
     SecondaryNumber = models.CharField(max_length=20, unique=False)
+    Image = models.ImageField(upload_to='images/residential/residential_lease',null=True)
+    Video = models.FileField(upload_to='videos/residential/residential_lease',null=True)
     Created_at = models.DateTimeField(default=timezone.now)
     class Meta:
         db_table = "residential_lease"
