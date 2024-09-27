@@ -107,7 +107,7 @@ function ResidentialRentCreate() {
   // Validate form fields
   if (BhkType === "" || Floor === "" || HouseType === "" || Parking === "" || Terrace === "" || Hall === "" ||
     Bedroom === "" || Bathroom === "" || District === "" || Town === "" || Street === "" ||
-    ExpectedRent === "" || ExpectedDepositMonths === "" || ExpectedDeposit === "" || Maintenance === "" ||
+    ExpectedRent === "" || ExpectedDepositMonths === "" || Maintenance === "" ||
     PreferredTenants === "" || Terms === "" || PrimaryNumber === "" || SecondaryNumber === "") {
     alert("Please fill all the required fields.");
   } 
