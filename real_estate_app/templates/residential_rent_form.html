@@ -2,11 +2,10 @@
 {% load static %}
 
 {% block content %}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Residential Rent Form</title>
 <script src="{% static 'js/residential_rent.js' %}"></script>
 <div class="container">
-    <form class="form" method="POST" enctype="multipart/form-data">
+    <form class="form" enctype="multipart/form-data">
         <h3 class="alert alert-warning">Residential Rent</h3>
         <!-- Property Details Start -->
         {% csrf_token %}
@@ -267,20 +266,20 @@
 
         <h4 class="alert alert-primary">Upload Images</h4>
         <div class="input-group mb-3">
-            <input type="file" class="form-control" name="Images" id="Images" multiple accept="image/*" required>
+            <input type="file" class="form-control" name="Images" id="Images" multiple accept="image/*">
             <label class="input-group-text btn btn-primary" for="Images">Upload</label>
         </div>
         <!-- Image Preview Section -->
         <div id="imagePreview" class="row mt-3"></div>
 
         <hr>
-        <h4 class="alert alert-primary">Upload Videos</h4>
+        <!-- <h4 class="alert alert-primary">Upload Videos</h4>
         <div class="input-group mb-3">
             <input type="file" class="form-control" name="Videos" id="Videos" accept="video/*" multiple>
             <label class="input-group-text btn btn-primary" for="Videos">Upload</label>
         </div>
 
-        <hr>
+        <hr> -->
         <h4 class="alert alert-primary">Contact Details</h4>
 
         <div class="row">

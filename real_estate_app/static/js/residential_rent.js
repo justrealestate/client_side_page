@@ -87,7 +87,7 @@ function ResidentialRentCreate() {
   formData.append('SecondaryNumber', SecondaryNumber);
 
   // Append CSRF token
-  formData.append('csrfmiddlewaretoken', $('input[name="csrfmiddlewaretoken"]').val());
+   formData.append('csrfmiddlewaretoken', $('input[name="csrfmiddlewaretoken"]').val());
 
   // Append files if selected
   let images = $('#Images')[0].files;
@@ -97,12 +97,12 @@ function ResidentialRentCreate() {
     }
   }
 
-  let videos = $('#Videos')[0].files;
-  if (videos.length > 0) {
-    for (let i = 0; i < videos.length; i++) {
-      formData.append('videos', videos[i]);
-    }
-  }
+  // let videos = $('#Videos')[0].files;
+  // if (videos.length > 0) {
+  //   for (let i = 0; i < videos.length; i++) {
+  //     formData.append('videos', videos[i]);
+  //   }
+  // }
 
   // Validate form fields
   if (BhkType === "" || Floor === "" || HouseType === "" || Parking === "" || Terrace === "" || Hall === "" ||
@@ -110,7 +110,8 @@ function ResidentialRentCreate() {
     ExpectedRent === "" || ExpectedDepositMonths === "" || ExpectedDeposit === "" || Maintenance === "" ||
     PreferredTenants === "" || Terms === "" || PrimaryNumber === "" || SecondaryNumber === "") {
     alert("Please fill all the required fields.");
-  } else {
+  } 
+  else {
     // Submit the form data via AJAX
     $.ajax({
       url: 'residential_rent_create/',  // Adjust URL as needed
