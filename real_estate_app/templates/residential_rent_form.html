@@ -183,7 +183,7 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="bi bi-currency-rupee"></i></span>
                         <input type="number" name="ExpectedRent" class="form-control" id="ExpectedRent"
-                            placeholder="Enter Amount" min="1" onkeyup="RentCalculator()" required>
+                            placeholder="Enter Amount" min="1" onchange="RentCalculator()" required>
                         <span class="input-group-text">/Month</span>
                     </div>
                 </div>
@@ -193,7 +193,7 @@
                     <label for="ExpectedDepositMonths" class="form-label">Expected Deposit Months<span
                             class="text-danger">*</span></label>
                     <select name="ExpectedDepositMonths" id="ExpectedDepositMonths" class="form-control"
-                        onkeyup="RentCalculator()" required>
+                        onchange="RentCalculator()" required>
                         <option value="">--Select--</option>
                         <option value="0">No Deposit Need</option>
                         <option value="1">1 Month</option>
