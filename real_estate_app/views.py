@@ -4,7 +4,10 @@ from .models import *
 
 def base(request):
     email = request.session['email']
-    return render(request,'base.html',{'email' : email})
+    content = {
+        'email' : email,
+    }
+    return render(request,'base.html',content)
 
 def residential_properties_show(request):
     return render(request,"residential_properties_show.html")
@@ -21,7 +24,11 @@ def residential_rent_form(request):
     return render(request,"residential_rent_form.html")
 
 def residential_resale_form(request):
-    return render(request,"residential_resale_form.html")
+    district = Places.objects.raw('SELECT * FROM places')
+    content = {
+        'district' : district
+    }
+    return render(request,"residential_resale_form.html",content)
 
 def residential_lease_form(request):
     return render(request,"residential_lease_form.html")

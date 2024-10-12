@@ -29,7 +29,7 @@ class Land(models.Model):
     SecondaryNumber = models.CharField(max_length=20, unique=False)
     Image = models.ImageField(upload_to='images/land/land_records',null=True)
     Video = models.FileField(upload_to='videos/land/land_records',null=True)
-    Uploaded_at = models.DateTimeField(auto_now_add=True)
+    Created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
         db_table = "land_records"
@@ -52,7 +52,7 @@ class LandRent(models.Model):
     SecondaryNumber = models.CharField(max_length=20, unique=False)
     Image = models.ImageField(upload_to='images/land/land_rent',null=True)
     Video = models.FileField(upload_to='videos/land/land_rent',null=True)
-    Uploaded_at = models.DateTimeField(auto_now_add=True)
+    Created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
         db_table = "land_rent"
@@ -75,7 +75,7 @@ class LandResale(models.Model):
     SecondaryNumber = models.CharField(max_length=20, unique=False)
     Image = models.ImageField(upload_to='images/land/land_resale',null=True)
     Video = models.FileField(upload_to='videos/land/land_resale',null=True)
-    Uploaded_at = models.DateTimeField(auto_now_add=True)
+    Created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
         db_table = "land_resale"
@@ -98,7 +98,7 @@ class LandLease(models.Model):
     SecondaryNumber = models.CharField(max_length=20, unique=False)
     Image = models.ImageField(upload_to='images/land/land_lease',null=True)
     Video = models.FileField(upload_to='videos/land/land_lease',null=True)
-    Uploaded_at = models.DateTimeField(auto_now_add=True)
+    Created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
         db_table = "land_lease"
@@ -204,7 +204,7 @@ class ResidentialResale(models.Model):
     SecondaryNumber = models.CharField(max_length=20, unique=False)
     Image = models.ImageField(upload_to='images/residential/residential_resale',null=True)
     Video = models.FileField(upload_to='videos/residential/residential_resale',null=True)
-    Created_at = models.DateTimeField(auto_now_add=True)
+    Created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
         db_table = "residential_resale"
@@ -245,7 +245,7 @@ class CommercialResale(models.Model):
 class LoginDetails(models.Model):
     Email = models.EmailField(validators=[EmailValidator()], unique=False)
     Password = models.CharField(max_length=128)
-    Created_at = models.DateTimeField(auto_now_add=True)
+    Created_at = models.DateTimeField(default=timezone.now)
     
     class Meta:
         db_table = "login_details"
@@ -254,7 +254,18 @@ class SignupDetails(models.Model):
     Username = models.CharField(max_length=95)
     Email = models.EmailField(validators=[EmailValidator()], unique=False)
     Password = models.CharField(max_length=128)
-    Created_at = models.DateTimeField(auto_now_add=True)
+    Created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
         db_table = "signup_details"
+        
+class Places(models.Model):
+    Country = models.CharField(max_length=20,default='India')
+    State = models.CharField(max_length=20,default='TamilNadu')
+    District = models.CharField(max_length=20,default='Thoothukudi')
+    Division = models.CharField(max_length=20)
+    Sub_Division = models.CharField(max_length=20)
+    Street = models.CharField(max_length=100)
+    
+    class Meta:
+        db_table = "places"

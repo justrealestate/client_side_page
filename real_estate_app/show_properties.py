@@ -29,3 +29,4 @@ def property_view(request):
 def residential_properties_show(request):
     residential_properties = Residential.objects.all()
     return render(request,'residential_properties_show.html',{'residential_properties':residential_properties})
+

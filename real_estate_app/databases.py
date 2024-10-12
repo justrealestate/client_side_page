@@ -137,9 +137,8 @@ def land_lease_create(request):
     
 def residential_rent_create(request):
     if request.method == 'POST':
-        images = request.FILES.getlist('images')
-        for image in images:
-            residential_rent = ResidentialRent(
+        #images = request.FILES.getlist('images')
+        residential_rent = ResidentialRent(
                 Email = request.session['email'],
                 BhkType = request.POST.get('BhkType'),
                 Floor = request.POST.get('Floor'),
@@ -160,10 +159,10 @@ def residential_rent_create(request):
                 Terms = request.POST.get('Terms'),
                 PrimaryNumber = request.POST.get('PrimaryNumber'),
                 SecondaryNumber = request.POST.get('SecondaryNumber'),
-                Image = image
+                #Image = image
             )
-            residential_rent.save()
-            residential = Residential(
+        residential_rent.save()
+        residential = Residential(
                 Email = request.session['email'],
                 BhkType = request.POST.get('BhkType'),
                 Floor = request.POST.get('Floor'),
@@ -185,10 +184,10 @@ def residential_rent_create(request):
                 Type = 'Rent',
                 PrimaryNumber = request.POST.get('PrimaryNumber'),
                 SecondaryNumber = request.POST.get('SecondaryNumber'),
-                Image = image
+                #Image = image
             )
             
-            residential.save()
+        residential.save()
         
         return render(request,'index.html')
 
@@ -197,11 +196,8 @@ def residential_rent_create(request):
 
 def residential_resale_create(request):
     if request.method == 'POST':
-        print('op')
-        images = request.FILES.getlist('images')
-        print('now')
-        for image in images:
-            residential_resale = ResidentialResale(
+        #images = request.FILES.getlist('images')
+        residential_resale = ResidentialResale(
                 Email = request.session['email'],
                 BhkType = request.POST.get('BhkType'),
                 TotalFloor = request.POST.get('TotalFloor'),
@@ -226,10 +222,10 @@ def residential_resale_create(request):
                 Description = request.POST.get('Description'),        
                 PrimaryNumber = request.POST.get('PrimaryNumber'),
                 SecondaryNumber = request.POST.get('SecondaryNumber'),
-                Image = image
+                #Image = image
             )
-            residential_resale.save()
-            residential = Residential(
+        residential_resale.save()
+        residential = Residential(
                 Email = request.session['email'],
                 BhkType = request.POST.get('BhkType'),
                 TotalFloor = request.POST.get('TotalFloor'),
@@ -255,10 +251,10 @@ def residential_resale_create(request):
                 Type = 'Resale',      
                 PrimaryNumber = request.POST.get('PrimaryNumber'),
                 SecondaryNumber = request.POST.get('SecondaryNumber'),
-                Image = image
+                #Image = image
             )
-            residential.save()
-            
+        residential.save()
+        
         return render(request,'index.html')
     
     return render(request,'index.html')

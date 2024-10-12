@@ -46,7 +46,6 @@ function residential_resale_create() {
     let Description = document.getElementById('Description').value;
     let PrimaryNumber = document.getElementById('PrimaryNumber').value;
     let SecondaryNumber = document.getElementById('SecondaryNumber').value;
-
     let formData = FormData();
     formData.append('BhkType', BhkType);
     formData.append('TotalFloor', TotalFloor);
@@ -71,17 +70,17 @@ function residential_resale_create() {
     formData.append('Description', Description);
     formData.append('PrimaryNumber', PrimaryNumber);
     formData.append('SecondaryNumber', SecondaryNumber);
-
+    
     // Append CSRF token
     formData.append('csrfmiddlewaretoken', $('input[name="csrfmiddlewaretoken"]').val());
 
-    // Append files if selected
-    let images = $('#Images')[0].files;
-    if (images.length > 0) {
-        for (let i = 0; i < images.length; i++) {
-            formData.append('images', images[i]);
-        }
-    }
+    
+    // let images = $('#Images')[0].files;
+    // if (images.length > 0) {
+    //     for (let i = 0; i < images.length; i++) {
+    //         formData.append('images', images[i]);
+    //     }
+    // }
 
     // let videos = $('#Videos')[0].files;
     // if (videos.length > 0) {
