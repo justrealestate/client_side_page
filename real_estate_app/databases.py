@@ -1,4 +1,5 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect 
+from django.http import JsonResponse
 from .models import *
 import datetime
 
@@ -189,9 +190,9 @@ def residential_rent_create(request):
             
         residential.save()
         
-        return render(request,'index.html')
-
-    return render(request,'index.html')
+        return JsonResponse({'success':True, 'message': 'Uploading successfully!'})
+    
+    return JsonResponse({'success': False, 'message': 'Error uploading data.'}, status=400)
     
 
 def residential_resale_create(request):
@@ -255,9 +256,9 @@ def residential_resale_create(request):
             )
         residential.save()
         
-        return render(request,'index.html')
+        return JsonResponse({'success':True, 'message': 'Uploading successfully!'})
     
-    return render(request,'index.html')
+    return JsonResponse({'success': False, 'message': 'Error uploading data.'}, status=400)
         
 
 def residential_lease_create(request):

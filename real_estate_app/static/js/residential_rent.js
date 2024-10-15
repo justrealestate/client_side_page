@@ -87,7 +87,7 @@ function ResidentialRentCreate() {
   formData.append('SecondaryNumber', SecondaryNumber);
 
   // Append CSRF token
-   formData.append('csrfmiddlewaretoken', $('input[name="csrfmiddlewaretoken"]').val());
+  formData.append('csrfmiddlewaretoken', $('input[name="csrfmiddlewaretoken"]').val());
 
   // Append files if selected
   // let images = $('#Images')[0].files;
@@ -110,21 +110,31 @@ function ResidentialRentCreate() {
     ExpectedRent === "" || ExpectedDepositMonths === "" || Maintenance === "" ||
     PreferredTenants === "" || Terms === "" || PrimaryNumber === "" || SecondaryNumber === "") {
     alert("Please fill all the required fields.");
-  } 
+  }
   else {
     // Submit the form data via AJAX
     $.ajax({
       url: 'residential_rent_create/',  // Adjust URL as needed
       type: 'POST',
       data: formData,
+      dataType: 'json',
       processData: false,  // Important for file uploads
       contentType: false,  // Important for file uploads
-      success: function() {
-        alert('Uploaded successfully!');
+      success: function (response) {
+        console.log('Full response:', response);
+        if (response.success) {
+          alert(response.message);
+          window.location.href = '/profile/';
+        } else {
+          console.log('Error response:', response);
+          alert('Error: ' + response.message);
+        }
       },
-      error: function() {
+      error: function (xhr, status, error) {
+        console.log('Error details:', xhr.responseText);
         alert('Error uploading data.');
       }
+
     });
   }
 }
