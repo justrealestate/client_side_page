@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-ow2x_r3^0-_&a0z^*^tl*!r+2hd+l)1am-3$-k#9+c7bs=e)c3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['brokerage.pythonanywhere.com']
 
 
 # Application definition
@@ -97,14 +97,11 @@ WSGI_APPLICATION = 'real_estate_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'real_estate',
-        'USER': 'root',
-        'PASSWORD': 'simplepwd',
-        'HOST': 'localhost',
+        'NAME': 'brokerage$real_estate',
+        'USER': 'brokerage',
+        'PASSWORD': '0Y:TKYTG7@@H>}M',
+        'HOST': 'brokerage.mysql.pythonanywhere-services.com',
         'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },   
     }
 }
 
