@@ -138,176 +138,185 @@ def land_lease_create(request):
     
 def residential_rent_create(request):
     if request.method == 'POST':
-        #images = request.FILES.getlist('images')
-        residential_rent = ResidentialRent(
-                Email = request.session['email'],
-                BhkType = request.POST.get('BhkType'),
-                Floor = request.POST.get('Floor'),
-                HouseType = request.POST.get('HouseType'),
-                Parking = request.POST.get('Parking'),
-                Terrace = request.POST.get('Terrace'),
-                Hall = request.POST.get('Hall'),
-                Bedroom = request.POST.get('Bedroom'),
-                Bathroom = request.POST.get('Bathroom'),
-                District = request.POST.get('District'),
-                Town = request.POST.get('Town'),
-                Street = request.POST.get('Street'),
-                ExpectedRent = request.POST.get('ExpectedRent'),
-                ExpectedDepositMonths = request.POST.get('ExpectedDepositMonths'),
-                ExpectedDeposit = request.POST.get('ExpectedDeposit'),
-                Maintenance = request.POST.get('Maintenance'),
-                PreferredTenants = request.POST.get('PreferredTenants'),
-                Terms = request.POST.get('Terms'),
-                PrimaryNumber = request.POST.get('PrimaryNumber'),
-                SecondaryNumber = request.POST.get('SecondaryNumber'),
-                #Image = image
-            )
-        residential_rent.save()
-        residential = Residential(
-                Email = request.session['email'],
-                BhkType = request.POST.get('BhkType'),
-                Floor = request.POST.get('Floor'),
-                HouseType = request.POST.get('HouseType'),
-                Parking = request.POST.get('Parking'),
-                Terrace = request.POST.get('Terrace'),
-                Hall = request.POST.get('Hall'),
-                Bedroom = request.POST.get('Bedroom'),
-                Bathroom = request.POST.get('Bathroom'),
-                District = request.POST.get('District'),
-                Town = request.POST.get('Town'),
-                Street = request.POST.get('Street'),
-                ExpectedRent = request.POST.get('ExpectedRent'),
-                ExpectedDepositMonths = request.POST.get('ExpectedDepositMonths'),
-                ExpectedDeposit = request.POST.get('ExpectedDeposit'),
-                Maintenance = request.POST.get('Maintenance'),
-                PreferredTenants = request.POST.get('PreferredTenants'),
-                Terms = request.POST.get('Terms'),
-                Type = 'Rent',
-                PrimaryNumber = request.POST.get('PrimaryNumber'),
-                SecondaryNumber = request.POST.get('SecondaryNumber'),
-                #Image = image
-            )
-            
-        residential.save()
+        images = request.FILES.getlist('images')
+        for image in images:
+            residential_rent = ResidentialRent(
+                    Email = request.session['email'],
+                    BhkType = request.POST.get('BhkType'),
+                    Floor = request.POST.get('Floor'),
+                    HouseType = request.POST.get('HouseType'),
+                    Parking = request.POST.get('Parking'),
+                    Terrace = request.POST.get('Terrace'),
+                    Hall = request.POST.get('Hall'),
+                    Bedroom = request.POST.get('Bedroom'),
+                    Bathroom = request.POST.get('Bathroom'),
+                    District = request.POST.get('District'),
+                    Town = request.POST.get('Town'),
+                    Street = request.POST.get('Street'),
+                    ExpectedRent = request.POST.get('ExpectedRent'),
+                    ExpectedDepositMonths = request.POST.get('ExpectedDepositMonths'),
+                    ExpectedDeposit = request.POST.get('ExpectedDeposit'),
+                    Maintenance = request.POST.get('Maintenance'),
+                    PreferredTenants = request.POST.get('PreferredTenants'),
+                    Terms = request.POST.get('Terms'),
+                    PrimaryNumber = request.POST.get('PrimaryNumber'),
+                    SecondaryNumber = request.POST.get('SecondaryNumber'),
+                    Image = image
+                )
+            residential_rent.save()
+            residential = Residential(
+                    Email = request.session['email'],
+                    BhkType = request.POST.get('BhkType'),
+                    Floor = request.POST.get('Floor'),
+                    HouseType = request.POST.get('HouseType'),
+                    Parking = request.POST.get('Parking'),
+                    Terrace = request.POST.get('Terrace'),
+                    Hall = request.POST.get('Hall'),
+                    Bedroom = request.POST.get('Bedroom'),
+                    Bathroom = request.POST.get('Bathroom'),
+                    District = request.POST.get('District'),
+                    Town = request.POST.get('Town'),
+                    Street = request.POST.get('Street'),
+                    ExpectedRent = request.POST.get('ExpectedRent'),
+                    ExpectedDepositMonths = request.POST.get('ExpectedDepositMonths'),
+                    ExpectedDeposit = request.POST.get('ExpectedDeposit'),
+                    Maintenance = request.POST.get('Maintenance'),
+                    PreferredTenants = request.POST.get('PreferredTenants'),
+                    Terms = request.POST.get('Terms'),
+                    Type = 'Rent',
+                    PrimaryNumber = request.POST.get('PrimaryNumber'),
+                    SecondaryNumber = request.POST.get('SecondaryNumber'),
+                    Image = image
+                )
+                
+            residential.save()
         
-        return JsonResponse({'success':True, 'message': 'Uploading successfully!'})
-    
-    return JsonResponse({'success': False, 'message': 'Error uploading data.'}, status=400)
+        return redirect('profile')
+    else:
+        return redirect('residential_rent_form')
     
 
 def residential_resale_create(request):
     if request.method == 'POST':
-        #images = request.FILES.getlist('images')
-        residential_resale = ResidentialResale(
-                Email = request.session['email'],
-                BhkType = request.POST.get('BhkType'),
-                TotalFloor = request.POST.get('TotalFloor'),
-                PropertyAge = request.POST.get('PropertyAge'),
-                HouseLength = request.POST.get('HouseLength'),
-                HouseWidth = request.POST.get('HouseWidth'),
-                HousePlotArea = request.POST.get('HousePlotArea'),
-                HouseCent = request.POST.get('HouseCent'),
-                LandLength = request.POST.get('LandLength'),
-                LandWidth = request.POST.get('LandWidth'),
-                LandPlotArea = request.POST.get('LandPlotArea'),
-                LandCent = request.POST.get('LandCent'),
-                Parking = request.POST.get('Parking'),
-                Terrace = request.POST.get('Terrace'),
-                Hall = request.POST.get('Hall'),
-                Bedroom = request.POST.get('Bedroom'),
-                Bathroom = request.POST.get('Bathroom'),
-                District = request.POST.get('District'),
-                Town = request.POST.get('Town'),
-                Street = request.POST.get('Street'),
-                ExpectedPrice = request.POST.get('ExpectedPrice'),
-                Description = request.POST.get('Description'),        
-                PrimaryNumber = request.POST.get('PrimaryNumber'),
-                SecondaryNumber = request.POST.get('SecondaryNumber'),
-                #Image = image
-            )
-        residential_resale.save()
-        residential = Residential(
-                Email = request.session['email'],
-                BhkType = request.POST.get('BhkType'),
-                TotalFloor = request.POST.get('TotalFloor'),
-                PropertyAge = request.POST.get('PropertyAge'),
-                HouseLength = request.POST.get('HouseLength'),
-                HouseWidth = request.POST.get('HouseWidth'),
-                HousePlotArea = request.POST.get('HousePlotArea'),
-                HouseCent = request.POST.get('HouseCent'),
-                LandLength = request.POST.get('LandLength'),
-                LandWidth = request.POST.get('LandWidth'),
-                LandPlotArea = request.POST.get('LandPlotArea'),
-                LandCent = request.POST.get('LandCent'),
-                Parking = request.POST.get('Parking'),
-                Terrace = request.POST.get('Terrace'),
-                Hall = request.POST.get('Hall'),
-                Bedroom = request.POST.get('Bedroom'),
-                Bathroom = request.POST.get('Bathroom'),
-                District = request.POST.get('District'),
-                Town = request.POST.get('Town'),
-                Street = request.POST.get('Street'),
-                ExpectedPrice = request.POST.get('ExpectedPrice'),
-                Description = request.POST.get('Description'),  
-                Type = 'Resale',      
-                PrimaryNumber = request.POST.get('PrimaryNumber'),
-                SecondaryNumber = request.POST.get('SecondaryNumber'),
-                #Image = image
-            )
-        residential.save()
+        images = request.FILES.getlist('images')
+        for image in images:
+            residential_resale = ResidentialResale(
+                    Email = request.session['email'],
+                    BhkType = request.POST.get('BhkType'),
+                    TotalFloor = request.POST.get('TotalFloor'),
+                    PropertyAge = request.POST.get('PropertyAge'),
+                    HouseLength = request.POST.get('HouseLength'),
+                    HouseWidth = request.POST.get('HouseWidth'),
+                    HousePlotArea = request.POST.get('HousePlotArea'),
+                    HouseCent = request.POST.get('HouseCent'),
+                    LandLength = request.POST.get('LandLength'),
+                    LandWidth = request.POST.get('LandWidth'),
+                    LandPlotArea = request.POST.get('LandPlotArea'),
+                    LandCent = request.POST.get('LandCent'),
+                    Parking = request.POST.get('Parking'),
+                    Terrace = request.POST.get('Terrace'),
+                    Hall = request.POST.get('Hall'),
+                    Bedroom = request.POST.get('Bedroom'),
+                    Bathroom = request.POST.get('Bathroom'),
+                    District = request.POST.get('District'),
+                    Town = request.POST.get('Town'),
+                    Street = request.POST.get('Street'),
+                    ExpectedPrice = request.POST.get('ExpectedPrice'),
+                    Description = request.POST.get('Description'),        
+                    PrimaryNumber = request.POST.get('PrimaryNumber'),
+                    SecondaryNumber = request.POST.get('SecondaryNumber'),
+                    Image = image
+                )
+            residential_resale.save()
+            residential = Residential(
+                    Email = request.session['email'],
+                    BhkType = request.POST.get('BhkType'),
+                    TotalFloor = request.POST.get('TotalFloor'),
+                    PropertyAge = request.POST.get('PropertyAge'),
+                    HouseLength = request.POST.get('HouseLength'),
+                    HouseWidth = request.POST.get('HouseWidth'),
+                    HousePlotArea = request.POST.get('HousePlotArea'),
+                    HouseCent = request.POST.get('HouseCent'),
+                    LandLength = request.POST.get('LandLength'),
+                    LandWidth = request.POST.get('LandWidth'),
+                    LandPlotArea = request.POST.get('LandPlotArea'),
+                    LandCent = request.POST.get('LandCent'),
+                    Parking = request.POST.get('Parking'),
+                    Terrace = request.POST.get('Terrace'),
+                    Hall = request.POST.get('Hall'),
+                    Bedroom = request.POST.get('Bedroom'),
+                    Bathroom = request.POST.get('Bathroom'),
+                    District = request.POST.get('District'),
+                    Town = request.POST.get('Town'),
+                    Street = request.POST.get('Street'),
+                    ExpectedPrice = request.POST.get('ExpectedPrice'),
+                    Description = request.POST.get('Description'),  
+                    Type = 'Resale',      
+                    PrimaryNumber = request.POST.get('PrimaryNumber'),
+                    SecondaryNumber = request.POST.get('SecondaryNumber'),
+                    Image = image
+                )
+            residential.save()
         
-        return JsonResponse({'success':True, 'message': 'Uploading successfully!'})
-    
-    return JsonResponse({'success': False, 'message': 'Error uploading data.'}, status=400)
+        return redirect('profile')
+    else:
+        return redirect('residential_resale_form')
         
 
 def residential_lease_create(request):
     if request.method == "POST":
-        print('l')
-        # residential_lease = ResidentialLease(
-        #     Email = request.session['email'),
-        #     BhkType = request.POST.get('BhkType'),
-        #     Floor = request.POST.get('Floor'),
-        #     HouseType = request.POST.get('HouseType'),
-        #     Parking = request.POST.get('Parking'),
-        #     Terrace = request.POST.get('Terrace'),
-        #     Hall = request.POST.get('Hall'),
-        #     Bedroom = request.POST.get('Bedroom'),
-        #     Bathroom = request.POST.get('Bathroom'),
-        #     District = request.POST.get('District'),
-        #     Town = request.POST.get('Town'),
-        #     Street = request.POST.get('Street'),
-        #     ExpectedLease = request.POST.get('ExpectedLease'),
-        #     ExpectedLeaseDuration = request.POST.get('ExpectedLeaseDuration'),
-        #     Maintenance = request.POST.get('Maintenance'),
-        #     Terms = request.POST.get('Terms'),
-        #     PrimaryNumber = request.POST.get('PrimaryNumber'),
-        #     SecondaryNumber = request.POST.get('SecondaryNumber']
-        # )
-        # residential = Residential(
-        #     Email = request.session['email'),
-        #     BhkType = request.POST.get('BhkType'),
-        #     Floor = request.POST.get('Floor'),
-        #     HouseType = request.POST.get('HouseType'),
-        #     Parking = request.POST.get('Parking'),
-        #     Terrace = request.POST.get('Terrace'),
-        #     Hall = request.POST.get('Hall'),
-        #     Bedroom = request.POST.get('Bedroom'),
-        #     Bathroom = request.POST.get('Bathroom'),
-        #     District = request.POST.get('District'),
-        #     Town = request.POST.get('Town'),
-        #     Street = request.POST.get('Street'),
-        #     ExpectedLease = request.POST.get('ExpectedLease'),
-        #     ExpectedLeaseDuration = request.POST.get('ExpectedLeaseDuration'),
-        #     Maintenance = request.POST.get('Maintenance'),
-        #     Type = 'Lease',
-        #     Terms = request.POST.get('Terms'),
-        #     PrimaryNumber = request.POST.get('PrimaryNumber'),
-        #     SecondaryNumber = request.POST.get('SecondaryNumber']
-        # )
-        # residential.save()
-        # residential_lease.save()
-        # return redirect('/')
+        images = request.FILES.getlist('images')
+        for image in images:
+            residential_lease = ResidentialLease(
+                Email = request.session['email'],
+                BhkType = request.POST.get('BhkType'),
+                Floor = request.POST.get('Floor'),
+                HouseType = request.POST.get('HouseType'),
+                Parking = request.POST.get('Parking'),
+                Terrace = request.POST.get('Terrace'),
+                Hall = request.POST.get('Hall'),
+                Bedroom = request.POST.get('Bedroom'),
+                Bathroom = request.POST.get('Bathroom'),
+                District = request.POST.get('District'),
+                Town = request.POST.get('Town'),
+                Street = request.POST.get('Street'),
+                ExpectedLease = request.POST.get('ExpectedLease'),
+                ExpectedLeaseDuration = request.POST.get('ExpectedLeaseDuration'),
+                Maintenance = request.POST.get('Maintenance'),
+                Terms = request.POST.get('Terms'),
+                PrimaryNumber = request.POST.get('PrimaryNumber'),
+                SecondaryNumber = request.POST.get('SecondaryNumber'),
+                Image = image
+            )
+            residential_lease.save()
+            residential = Residential(
+                Email = request.session['email'],
+                BhkType = request.POST.get('BhkType'),
+                Floor = request.POST.get('Floor'),
+                HouseType = request.POST.get('HouseType'),
+                Parking = request.POST.get('Parking'),
+                Terrace = request.POST.get('Terrace'),
+                Hall = request.POST.get('Hall'),
+                Bedroom = request.POST.get('Bedroom'),
+                Bathroom = request.POST.get('Bathroom'),
+                District = request.POST.get('District'),
+                Town = request.POST.get('Town'),
+                Street = request.POST.get('Street'),
+                ExpectedLease = request.POST.get('ExpectedLease'),
+                ExpectedLeaseDuration = request.POST.get('ExpectedLeaseDuration'),
+                Maintenance = request.POST.get('Maintenance'),
+                Type = 'Lease',
+                Terms = request.POST.get('Terms'),
+                PrimaryNumber = request.POST.get('PrimaryNumber'),
+                SecondaryNumber = request.POST.get('SecondaryNumber'),
+                Image = image
+            )
+            print('third layer')
+            residential.save()
+        
+        return redirect('profile')
+    else:
+        return redirect('residential_lease_form')
 
 def login(request):
     print('l')

@@ -5,7 +5,7 @@
 <title>Residential Rent Form</title>
 <script src="{% static 'js/residential_rent.js' %}"></script>
 <div class="container">
-    <form class="form" enctype="multipart/form-data">
+    <form class="form" action="residential_rent_create/" method="POST" enctype="multipart/form-data">
         <h3 class="alert alert-warning">Residential Rent</h3>
         <!-- Property Details Start -->
         {% csrf_token %}
@@ -218,7 +218,7 @@
                     <label for="ExpectedDeposit" class="form-label">Expected Deposit</label>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="bi bi-currency-rupee"></i></span>
-                        <input type="number" name="ExpectedDeposit" class="form-control" id="ExpectedDeposit" disabled>
+                        <input type="number" name="ExpectedDeposit" class="form-control" id="ExpectedDeposit" readonly>
                     </div>
                 </div>
             </div>
@@ -263,15 +263,15 @@
         </div>
         <hr>
 
-        <!-- <h4 class="alert alert-primary">Upload Images</h4>
+        <h4 class="alert alert-primary">Upload Images</h4>
         <div class="input-group mb-3">
-            <input type="file" class="form-control" name="Images" id="Images" multiple accept="image/*">
+            <input type="file" class="form-control" name="images" id="Images" multiple accept="image/*">
             <label class="input-group-text btn btn-primary" for="Images">Upload</label>
         </div>
          Image Preview Section 
-        <div id="imagePreview" class="row mt-3"></div> 
+        <div id="imagePreview" class="row mt-3"></div>  
 
-        <hr>
+        <!--<hr>
         <h4 class="alert alert-primary">Upload Videos</h4>
         <div class="input-group mb-3">
             <input type="file" class="form-control" name="Videos" id="Videos" accept="video/*" multiple>

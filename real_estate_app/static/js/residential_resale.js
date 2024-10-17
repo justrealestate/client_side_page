@@ -46,30 +46,30 @@ function residential_resale_create() {
     let Description = document.getElementById('Description').value;
     let PrimaryNumber = document.getElementById('PrimaryNumber').value;
     let SecondaryNumber = document.getElementById('SecondaryNumber').value;
-    let formData = FormData();
-    formData.append('BhkType', BhkType);
-    formData.append('TotalFloor', TotalFloor);
-    formData.append('PropertyAge', PropertyAge);
-    formData.append('HouseLength',HouseLength);
-    formData.append('HouseWidth',HouseWidth);
-    formData.append('HousePlotArea',HousePlotArea);
-    formData.append('HouseCent',HouseCent);
-    formData.append('LandLength',LandLength);
-    formData.append('LandWidth',LandWidth);
-    formData.append('LandPlotArea',LandPlotArea);
-    formData.append('LandCent',LandCent);
-    formData.append('Parking', Parking);
-    formData.append('Terrace', Terrace);
-    formData.append('Hall', Hall);
-    formData.append('Bedroom', Bedroom);
-    formData.append('Bathroom', Bathroom);
-    formData.append('District', District);
-    formData.append('Town', Town);
-    formData.append('Street', Street);
-    formData.append('ExpectedPrice', ExpectedPrice);
-    formData.append('Description', Description);
-    formData.append('PrimaryNumber', PrimaryNumber);
-    formData.append('SecondaryNumber', SecondaryNumber);
+    // let formData = FormData();
+    // formData.append('BhkType', BhkType);
+    // formData.append('TotalFloor', TotalFloor);
+    // formData.append('PropertyAge', PropertyAge);
+    // formData.append('HouseLength',HouseLength);
+    // formData.append('HouseWidth',HouseWidth);
+    // formData.append('HousePlotArea',HousePlotArea);
+    // formData.append('HouseCent',HouseCent);
+    // formData.append('LandLength',LandLength);
+    // formData.append('LandWidth',LandWidth);
+    // formData.append('LandPlotArea',LandPlotArea);
+    // formData.append('LandCent',LandCent);
+    // formData.append('Parking', Parking);
+    // formData.append('Terrace', Terrace);
+    // formData.append('Hall', Hall);
+    // formData.append('Bedroom', Bedroom);
+    // formData.append('Bathroom', Bathroom);
+    // formData.append('District', District);
+    // formData.append('Town', Town);
+    // formData.append('Street', Street);
+    // formData.append('ExpectedPrice', ExpectedPrice);
+    // formData.append('Description', Description);
+    // formData.append('PrimaryNumber', PrimaryNumber);
+    // formData.append('SecondaryNumber', SecondaryNumber);
     
     // Append CSRF token
     formData.append('csrfmiddlewaretoken', $('input[name="csrfmiddlewaretoken"]').val());
@@ -96,20 +96,20 @@ function residential_resale_create() {
         Description == "" || PrimaryNumber == "" || SecondaryNumber == "") {
         alert("Please fill the Required Field🥺")
     }
-    else {
-        $.ajax({
-            url: 'residential_resale_create/',
-            type: 'POST',
-            data: formData,
-            processData : false,
-            contentType : false,
-            success: function () {
-                alert("Your Property Posted Successfully😊");
-            },
-            error: function () {
-                alert("Sorry Some Error Occurs😖");
-            }
-        });
-    }
+    // else {
+    //     $.ajax({
+    //         url: 'residential_resale_create/',
+    //         type: 'POST',
+    //         data: formData,
+    //         processData : false,
+    //         contentType : false,
+    //         success: function () {
+    //             alert("Your Property Posted Successfully😊");
+    //         },
+    //         error: function () {
+    //             alert("Sorry Some Error Occurs😖");
+    //         }
+    //     });
+    // }
 
 }

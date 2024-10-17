@@ -65,26 +65,26 @@ function ResidentialRentCreate() {
   let SecondaryNumber = document.getElementById('SecondaryNumber').value;
 
   // Create FormData object
-  let formData = new FormData();
-  formData.append('BhkType', BhkType);
-  formData.append('Floor', Floor);
-  formData.append('HouseType', HouseType);
-  formData.append('Parking', Parking);
-  formData.append('Terrace', Terrace);
-  formData.append('Hall', Hall);
-  formData.append('Bedroom', Bedroom);
-  formData.append('Bathroom', Bathroom);
-  formData.append('District', District);
-  formData.append('Town', Town);
-  formData.append('Street', Street);
-  formData.append('ExpectedRent', ExpectedRent);
-  formData.append('ExpectedDepositMonths', ExpectedDepositMonths);
-  formData.append('ExpectedDeposit', ExpectedDeposit);
-  formData.append('Maintenance', Maintenance);
-  formData.append('PreferredTenants', PreferredTenants);
-  formData.append('Terms', Terms);
-  formData.append('PrimaryNumber', PrimaryNumber);
-  formData.append('SecondaryNumber', SecondaryNumber);
+  // let formData = new FormData();
+  // formData.append('BhkType', BhkType);
+  // formData.append('Floor', Floor);
+  // formData.append('HouseType', HouseType);
+  // formData.append('Parking', Parking);
+  // formData.append('Terrace', Terrace);
+  // formData.append('Hall', Hall);
+  // formData.append('Bedroom', Bedroom);
+  // formData.append('Bathroom', Bathroom);
+  // formData.append('District', District);
+  // formData.append('Town', Town);
+  // formData.append('Street', Street);
+  // formData.append('ExpectedRent', ExpectedRent);
+  // formData.append('ExpectedDepositMonths', ExpectedDepositMonths);
+  // formData.append('ExpectedDeposit', ExpectedDeposit);
+  // formData.append('Maintenance', Maintenance);
+  // formData.append('PreferredTenants', PreferredTenants);
+  // formData.append('Terms', Terms);
+  // formData.append('PrimaryNumber', PrimaryNumber);
+  // formData.append('SecondaryNumber', SecondaryNumber);
 
   // Append CSRF token
   formData.append('csrfmiddlewaretoken', $('input[name="csrfmiddlewaretoken"]').val());
@@ -111,30 +111,58 @@ function ResidentialRentCreate() {
     PreferredTenants === "" || Terms === "" || PrimaryNumber === "" || SecondaryNumber === "") {
     alert("Please fill all the required fields.");
   }
-  else {
-    // Submit the form data via AJAX
-    $.ajax({
-      url: 'residential_rent_create/',  // Adjust URL as needed
-      type: 'POST',
-      data: formData,
-      dataType: 'json',
-      processData: false,  // Important for file uploads
-      contentType: false,  // Important for file uploads
-      success: function (response) {
-        console.log('Full response:', response);
-        if (response.success) {
-          alert(response.message);
-          window.location.href = '/profile/';
-        } else {
-          console.log('Error response:', response);
-          alert('Error: ' + response.message);
-        }
-      },
-      error: function (xhr, status, error) {
-        console.log('Error details:', xhr.responseText);
-        alert('Error uploading data.');
-      }
+  // else {
+  //   // Submit the form data via AJAX
+  //   $.ajax({
+  //     url: 'residential_rent_create/',  // Adjust URL as needed
+  //     type: 'POST',
+  //     data: formData,
+  //     dataType: 'json',
+  //     processData: false,  // Important for file uploads
+  //     contentType: false,  // Important for file uploads
+  //     success: function (response) {
+  //       console.log('Full response:', response);
+  //       if (response.success) {
+  //         alert(response.message);
+  //         window.location.href = '/profile/';
+  //       } else {
+  //         console.log('Error response:', response);
+  //         alert('Error: ' + response.message);
+  //       }
+  //     },
+  //     error: function (xhr, status, error) {
+  //       console.log('Error details:', xhr.responseText);
+  //       alert('Error uploading data.');
+  //     }
 
-    });
-  }
+  //   });
+  // }
 }
+
+// document.getElementById('Images').addEventListener('change', function (event) {
+//   const imagePreview = document.getElementById('imagePreview');
+//   imagePreview.innerHTML = ''; // Clear previous images
+
+//   const files = event.target.files; // Get the selected files
+
+//   // Loop through the selected files and create an image preview for each
+//   for (let i = 0; i < files.length; i++) {
+//       const file = files[i];
+
+//       if (file && file.type.startsWith('image/')) {
+//           const reader = new FileReader();
+          
+//           reader.onload = function (e) {
+//               const imgElement = document.createElement('img');
+//               imgElement.src = e.target.result;
+//               imgElement.className = 'img-thumbnail m-2';
+//               imgElement.style.width = '150px';
+//               imgElement.style.height = '150px';
+
+//               imagePreview.appendChild(imgElement);
+//           };
+
+//           reader.readAsDataURL(file);
+//       }
+//   }
+// });

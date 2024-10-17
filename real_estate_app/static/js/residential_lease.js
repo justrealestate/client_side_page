@@ -1,4 +1,4 @@
-function ResidentialLeaseCreate(){
+function ResidentialLeaseCreate() {
     let BhkType = document.getElementById('BhkType').value;
     let Floor = document.getElementById('Floor').value;
     let HouseType = document.getElementById('HouseType').value;
@@ -17,44 +17,45 @@ function ResidentialLeaseCreate(){
     let PrimaryNumber = document.getElementById('PrimaryNumber').value;
     let SecondaryNumber = document.getElementById('SecondaryNumber').value;
 
-    if(BhkType == "" || Floor == "" || HouseType == "" || Parking == "" || Terrace == "" || Hall == "" || 
+    if (BhkType == "" || Floor == "" || HouseType == "" || Parking == "" || Terrace == "" || Hall == "" ||
         Bedroom == "" || Bathroom == "" || District == "" || Town == "" || Street == "" ||
         ExpectedLease == "" || ExpectedLeaseDuration == "" || Maintenance == "" || Terms == "" ||
-       PrimaryNumber == "" || SecondaryNumber == ""){
+        PrimaryNumber == "" || SecondaryNumber == "") {
 
         alert("Please fill the Required Fields");
-    }else{
-        $.ajax({
-            url : 'residential_lease_create/',
-            type : 'POST',
-            data : {
-                BhkType : BhkType,
-                Floor : Floor,
-                HouseType : HouseType,
-                Parking : Parking,
-                Terrace : Terrace,
-                Hall : Hall,
-                Bedroom : Bedroom,
-                Bathroom : Bathroom,
-                District : District,
-                Town : Town,
-                Street : Street,
-                ExpectedLease : ExpectedLease,
-                ExpectedLeaseDuration : ExpectedLeaseDuration,
-                Maintenance : Maintenance,
-                Terms : Terms,  
-                PrimaryNumber : PrimaryNumber,
-                SecondaryNumber : SecondaryNumber,
-                csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val()
-            },
-            success:function(){
-                alert("Your Property is Posted Successfully😊")
-            },
-            error:function(){
-                alert("Sorry something went Wrong😖");
-            }
-           
-        });
     }
+    //else{
+    //     $.ajax({
+    //         url : 'residential_lease_create/',
+    //         type : 'POST',
+    //         data : {
+    //             BhkType : BhkType,
+    //             Floor : Floor,
+    //             HouseType : HouseType,
+    //             Parking : Parking,
+    //             Terrace : Terrace,
+    //             Hall : Hall,
+    //             Bedroom : Bedroom,
+    //             Bathroom : Bathroom,
+    //             District : District,
+    //             Town : Town,
+    //             Street : Street,
+    //             ExpectedLease : ExpectedLease,
+    //             ExpectedLeaseDuration : ExpectedLeaseDuration,
+    //             Maintenance : Maintenance,
+    //             Terms : Terms,  
+    //             PrimaryNumber : PrimaryNumber,
+    //             SecondaryNumber : SecondaryNumber,
+    //             csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val()
+    //         },
+    //         success:function(){
+    //             alert("Your Property is Posted Successfully😊")
+    //         },
+    //         error:function(){
+    //             alert("Sorry something went Wrong😖");
+    //         }
+
+    //     });
+    // }
 
 }

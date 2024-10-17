@@ -6,7 +6,7 @@
 
 
 <div class="container">
-    <form class="form" enctype="multipart/form-data">
+    <form class="form" action="residential_resale_create/" method="POST" enctype="multipart/form-data">
         <h3 class="alert alert-warning">Residential Resale</h3>
         <!-- Property Details Start -->
         {% csrf_token %}
@@ -86,7 +86,7 @@
                     <label for="HousePlotArea" class="form-label">Plot Area</label>
                     <div class="input-group mb-3">
                         <input type="number" class="form-control" id="HousePlotArea" name="HousePlotArea"
-                            placeholder="Plot Area" disabled>
+                            placeholder="Plot Area" readonly>
                         <div class="input-group-append">
                             <span class="input-group-text" id="plot-area-addon">sq.ft</span>
                         </div>
@@ -98,7 +98,7 @@
                     <label for="HouseCent" class="form-label">Cent</label>
                     <div class="input-group mb-3">
                         <input type="number" class="form-control" id="HouseCent" name="HouseCent" placeholder="Cent"
-                            disabled>
+                            readonly>
                     </div>
                 </div>
             </div>
@@ -133,7 +133,7 @@
                     <label for="LandPlotArea" class="form-label">Plot Area</label>
                     <div class="input-group mb-3">
                         <input type="number" class="form-control" id="LandPlotArea" name="LandPlotArea"
-                            placeholder="Plot Area" disabled>
+                            placeholder="Plot Area" readonly>
                         <div class="input-group-append">
                             <span class="input-group-text" id="plot-area-addon">sq.ft</span>
                         </div>
@@ -145,7 +145,7 @@
                     <label for="LandCent" class="form-label">Cent</label>
                     <div class="input-group mb-3">
                         <input type="number" class="form-control" id="LandCent" name="LandCent" placeholder="Cent"
-                            disabled>
+                            readonly>
                     </div>
                 </div>
             </div>
@@ -278,12 +278,12 @@
             </div>
         </div>
         <hr>
-        <!-- <h4 class="alert alert-primary">Upload Images</h4>
+        <h4 class="alert alert-primary">Upload Images</h4>
         <div class="input-group mb-3">
-            <input type="file" class="form-control" name="Images" id="Images" multiple accept="image/*">
+            <input type="file" class="form-control" name="images" id="Images" multiple accept="image/*">
             <label class="input-group-text btn btn-primary" for="Images">Upload</label>
         </div>
-        <hr> -->
+        <hr>
         <h4 class="alert alert-primary">Contact Details</h4>
 
         <div class="row">

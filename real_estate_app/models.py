@@ -168,7 +168,7 @@ class ResidentialRent(models.Model):
     SecondaryNumber = models.CharField(max_length=20, unique=False)
     Image = models.ImageField(upload_to='images/residential/residential_rent',null=True)
     Video = models.FileField(upload_to='videos/residential/residential_rent',null=True)
-    Created_at = models.DateTimeField(default=timezone.now)
+    Created_at = models.DateTimeField(auto_now_add=True)
     
 
     class Meta:
