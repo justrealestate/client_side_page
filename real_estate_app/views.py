@@ -21,33 +21,69 @@ def post_property(request):
 #residential
 
 def residential_rent_form(request):
-    return render(request,"residential_rent_form.html")
+    if 'email' in request.session:
+        return render(request,"residential_rent_form.html")
+    
+    else:
+        return redirect('login')
+    
+    
 
 def residential_resale_form(request):
-    district = Places.objects.raw('SELECT * FROM places')
-    content = {
-        'district' : district
-    }
-    return render(request,"residential_resale_form.html",content)
+    if 'email' in request.session:
+        district = Places.objects.raw('SELECT * FROM places')
+        content = {
+            'district' : district
+        }
+        return render(request,"residential_resale_form.html",content)
+    else:
+        return redirect('login')
 
 def residential_lease_form(request):
-    return render(request,"residential_lease_form.html")
+    if 'email' in request.session:
+        return render(request,"residential_lease_form.html")
+    else:
+        return redirect('login')
 
 #commercial
 
 def commercial_rent_form(request):
-    return render(request,"commercial_rent_form.html")
+    if 'email' in request.session:
+        return render(request,"commercial_rent_form.html")
+    else:
+        return redirect('login')
 
 def commercial_sale_form(request):
-    return render(request,"commercial_sale_form.html")
+    if 'email' in request.session:
+        return render(request,"commercial_sale_form.html")
+    else:
+        return redirect('login')
+    
+def commercial_lease_form(request):
+    if 'email' in request.session:
+        return render(request,"commercial_lease_form.html")
+    else:
+        return redirect('login')
 
 #land
 
+def land_rent_form(request):
+    if 'email' in request.session:
+        return render(request,"land_rent_form.html")
+    else:
+        return redirect('login')
+
 def land_resale_form(request):
-    return render(request,'land_resale_form.html')
+    if 'email' in request.session:
+        return render(request,'land_resale_form.html')
+    else:
+        return redirect('login')
 
 def land_lease_form(request):
-    return render(request,"land_lease_form.html")
+    if 'email' in request.session:
+        return render(request,"land_lease_form.html")
+    else:
+        return redirect('login')
 
 def profile(request):
     email = request.session['email']
@@ -77,8 +113,7 @@ def data_processing(request):
 def plans(request):
     return render(request,"plans.html")
 
-def land_rent_form(request):
-    return render(request,"land_rent_form.html")
+
 
 def login(request):
     return render(request,"login.html")

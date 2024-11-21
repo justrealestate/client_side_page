@@ -4,6 +4,8 @@ from django.utils import timezone
 
 
 class Land(models.Model):
+    Property_Id = models.CharField(max_length=20,default='-')
+    Customer_Id = models.CharField(max_length=20,default='-')
     Email = models.EmailField(validators=[EmailValidator()], unique=False)
     Length = models.DecimalField(max_digits=10, decimal_places=2)  
     Width = models.DecimalField(max_digits=10, decimal_places=2)  
@@ -35,6 +37,8 @@ class Land(models.Model):
         db_table = "land_records"
 
 class LandRent(models.Model):
+    Property_Id = models.CharField(max_length=20,default='-')
+    Customer_Id = models.CharField(max_length=20,default='-')
     Email = models.EmailField(validators=[EmailValidator()], unique=False)
     Length = models.DecimalField(max_digits=10, decimal_places=2)  # Example: 10.5
     Width = models.DecimalField(max_digits=10, decimal_places=2)   # Example: 20.25
@@ -58,6 +62,8 @@ class LandRent(models.Model):
         db_table = "land_rent"
 
 class LandResale(models.Model):
+    Property_Id = models.CharField(max_length=20,default='-')
+    Customer_Id = models.CharField(max_length=20,default='-')
     Email = models.EmailField(validators=[EmailValidator()], unique=False)
     Length = models.DecimalField(max_digits=10, decimal_places=2)  # Example: 10.5
     Width = models.DecimalField(max_digits=10, decimal_places=2)   # Example: 20.25
@@ -81,6 +87,8 @@ class LandResale(models.Model):
         db_table = "land_resale"
 
 class LandLease(models.Model):
+    Property_Id = models.CharField(max_length=20,default='-')
+    Customer_Id = models.CharField(max_length=20,default='-')
     Email = models.EmailField(validators=[EmailValidator()], unique=False)
     Length = models.DecimalField(max_digits=10, decimal_places=2)  # Example: 10.5
     Width = models.DecimalField(max_digits=10, decimal_places=2)   # Example: 20.25
@@ -104,6 +112,8 @@ class LandLease(models.Model):
         db_table = "land_lease"
 
 class Residential(models.Model):
+    Property_Id = models.CharField(max_length=20,default='-')
+    Customer_Id = models.CharField(max_length=20,default='-')
     BhkType = models.CharField(max_length=50)
     Email = models.EmailField(validators=[EmailValidator()], unique=False)
     Floor = models.CharField(max_length=50,default='-')
@@ -146,6 +156,8 @@ class Residential(models.Model):
         db_table = "residential_records"
 
 class ResidentialRent(models.Model):
+    Property_Id = models.CharField(max_length=20,default='-')
+    Customer_Id = models.CharField(max_length=20,default='-')
     BhkType = models.CharField(max_length=50)
     Email = models.EmailField(validators=[EmailValidator()], unique=False)
     Floor = models.CharField(max_length=50)
@@ -178,6 +190,8 @@ class ResidentialRent(models.Model):
 
 
 class ResidentialResale(models.Model):
+    Property_Id = models.CharField(max_length=20,default='-')
+    Customer_Id = models.CharField(max_length=20,default='-')
     BhkType = models.CharField(max_length=50)
     Email = models.EmailField(validators=[EmailValidator()], unique=False)
     TotalFloor = models.CharField(max_length=50)
@@ -210,6 +224,8 @@ class ResidentialResale(models.Model):
         db_table = "residential_resale"
 
 class ResidentialLease(models.Model):
+    Property_Id = models.CharField(max_length=20,default='-')
+    Customer_Id = models.CharField(max_length=20,default='-')
     BhkType = models.CharField(max_length=50)
     Email = models.EmailField(validators=[EmailValidator()], unique=False)
     Floor = models.CharField(max_length=50)
@@ -235,12 +251,18 @@ class ResidentialLease(models.Model):
         db_table = "residential_lease"
 
 class CommercialRent(models.Model):
+    
     class Meta:
         db_table = "commercial_rent"
 
 class CommercialResale(models.Model):
     class Meta:
         db_table = "commercial_resale"
+        
+        
+class CommercialLease(models.Model):
+    class Meta:
+        db_table = "commercial_lease"
 
 class LoginDetails(models.Model):
     Email = models.EmailField(validators=[EmailValidator()], unique=False)
@@ -254,6 +276,7 @@ class SignupDetails(models.Model):
     Username = models.CharField(max_length=95)
     Email = models.EmailField(validators=[EmailValidator()], unique=False)
     Password = models.CharField(max_length=128)
+    Customer_id = models.CharField(max_length=20,default='-')
     Created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:

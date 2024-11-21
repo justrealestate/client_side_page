@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-ow2x_r3^0-_&a0z^*^tl*!r+2hd+l)1am-3$-k#9+c7bs=e)c3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['brokerage.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -90,6 +90,8 @@ EMAIL_HOST_PASSWORD = 'rnek hyzu ijqz qsds'
 
 WSGI_APPLICATION = 'real_estate_project.wsgi.application'
 
+RAZORPAY_API_KEY = 'rzp_test_Gpj7KOsWASfff4'
+RAZORPAY_API_SECRET = 'ltjUzO68WELTqnq4DsASG9Bh'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -97,10 +99,10 @@ WSGI_APPLICATION = 'real_estate_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'brokerage$real_estate',
-        'USER': 'brokerage',
-        'PASSWORD': '0Y:TKYTG7@@H>}M',
-        'HOST': 'brokerage.mysql.pythonanywhere-services.com',
+        'NAME': 'real_estate',
+        'USER': 'root',
+        'PASSWORD': 'simplepwd',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }

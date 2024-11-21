@@ -1,7 +1,9 @@
 from django.shortcuts import render,redirect
-from . import databases
+from django.http import JsonResponse
 from .models import *
-import re
+import datetime
+
+x = datetime.datetime.now()
 
 
 def signup(request):
@@ -12,25 +14,25 @@ def signup_verification(request):
         username = request.POST.get('username')
         emailid = request.POST.get('email')
         password = request.POST.get('password')
-
-        if SignupDetails.objects.raw('SELECT * FROM signup_details WHERE Email = %s',[emailid]):   
-            context = {
-                'info' : 'Your already register'
-            }
-            return render(request,'signup.html',context)
-    
+        customer_id = 'sample123'    
+        
+        if SignupDetails.objects.raw('SELECT * FROM signup_details WHERE Email = %s',[emailid]):
+            return JsonResponse({'success': False, 'message': 'Username already exists'}, status=409)
+        
         else:
             signup = SignupDetails(
                 Username = username,
                 Email = emailid,
-                Password = password
+                Password = password,
+                Customer_id =  customer_id
             )
             signup.save()
-            return redirect('login')
+            
+            return JsonResponse({'success': True, 'message': 'Registration successful'}, status=200)
             
 
     else:
-        return render(request,'signup.html',{'error' : 'Something went Wrong'})       
+        return JsonResponse({'success': False, 'message': 'Invalid request method'}, status=405)
         
 
 
@@ -43,17 +45,18 @@ def login_verification(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        if SignupDetails.objects.raw('SELECT * FROM signup_details WHERE Email =%s && Password =%s',[email,password]):
+        check = SignupDetails.objects.raw('SELECT * FROM signup_details WHERE Email =%s && Password =%s',[email,password])
+        if check:
             login = LoginDetails(
                 Email = email,
                 Password = password
             )
             login.save()
             request.session['email'] = email
-            return redirect('index')
+            return JsonResponse({'success': True, 'message': 'Login successful'}, status=200)
         
         else:
-            return render(request,'login.html',{'error':'Invalid Input'})
+            return JsonResponse({'success': False, 'message': 'Invalid request method'}, status=405)
             
     else:
-        return render(request,'signup.html',{'error' : 'Something went Wrong'})  
+        return JsonResponse({'success': False, 'message': 'Invalid request method'}, status=405)

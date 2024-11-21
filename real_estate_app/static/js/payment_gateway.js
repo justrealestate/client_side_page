@@ -24,13 +24,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  function showAlert(value) {
-    alert("You selected: " + value);
-  }
 
-  function init() {
-    const checkedRadio = document.querySelector('input[name="option"]:checked');
-    if (checkedRadio) {
-      showAlert(checkedRadio.value);
-    }
-  }
+
+  // function init() {
+  //   const checkedRadio = document.querySelector('input[name="option"]:checked');
+  //   if (checkedRadio) {
+  //     alert("You selected: " + checkedRadio.value);
+  //   }
+  // }
