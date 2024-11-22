@@ -1,61 +1,76 @@
-function ResidentialLeaseCreate() {
-    let BhkType = document.getElementById('BhkType').value;
-    let Floor = document.getElementById('Floor').value;
-    let HouseType = document.getElementById('HouseType').value;
-    let Parking = document.getElementById('Parking').value;
-    let Terrace = document.getElementById('Terrace').value;
-    let Hall = document.getElementById('Hall').value;
-    let Bedroom = document.getElementById('Bedroom').value;
-    let Bathroom = document.getElementById('Bathroom').value;
-    let District = document.getElementById('District').value;
-    let Town = document.getElementById('Town').value;
-    let Street = document.getElementById('Street').value;
-    let ExpectedLease = document.getElementById('ExpectedLease').value;
-    let ExpectedLeaseDuration = document.getElementById('ExpectedLeaseDuration').value;
-    let Maintenance = document.getElementById('Maintenance').value;
-    let Terms = document.getElementById('Terms').value;
-    let PrimaryNumber = document.getElementById('PrimaryNumber').value;
-    let SecondaryNumber = document.getElementById('SecondaryNumber').value;
+document.addEventListener("DOMContentLoaded", function () {
+    const residentialLeaseForm = document.getElementById("residentialLeaseForm");
 
-    if (BhkType == "" || Floor == "" || HouseType == "" || Parking == "" || Terrace == "" || Hall == "" ||
-        Bedroom == "" || Bathroom == "" || District == "" || Town == "" || Street == "" ||
-        ExpectedLease == "" || ExpectedLeaseDuration == "" || Maintenance == "" || Terms == "" ||
-        PrimaryNumber == "" || SecondaryNumber == "") {
+    residentialLeaseForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        let BhkTypeInput = document.getElementById('BhkType');
+        let FloorInput = document.getElementById('Floor');
+        let HouseTypeInput = document.getElementById('HouseType');
+        let ParkingInput = document.getElementById('Parking');
+        let TerraceInput = document.getElementById('Terrace');
+        let HallInput = document.getElementById('Hall');
+        let BedroomInput = document.getElementById('Bedroom');
+        let BathroomInput = document.getElementById('Bathroom');
+        let DistrictInput = document.getElementById('District');
+        let TownInput = document.getElementById('Town');
+        let StreetInput = document.getElementById('Street');
+        let ExpectedLeaseInput = document.getElementById('ExpectedLease');
+        let ExpectedLeaseDurationInput = document.getElementById('ExpectedLeaseDuration');
+        let MaintenanceInput = document.getElementById('Maintenance');
+        let TermsInput = document.getElementById('Terms');
+        let PrimaryNumberInput = document.getElementById('PrimaryNumber');
+        let SecondaryNumberInput = document.getElementById('SecondaryNumber');
 
-        alert("Please fill the Required Fields");
-    }
-    //else{
-    //     $.ajax({
-    //         url : 'residential_lease_create/',
-    //         type : 'POST',
-    //         data : {
-    //             BhkType : BhkType,
-    //             Floor : Floor,
-    //             HouseType : HouseType,
-    //             Parking : Parking,
-    //             Terrace : Terrace,
-    //             Hall : Hall,
-    //             Bedroom : Bedroom,
-    //             Bathroom : Bathroom,
-    //             District : District,
-    //             Town : Town,
-    //             Street : Street,
-    //             ExpectedLease : ExpectedLease,
-    //             ExpectedLeaseDuration : ExpectedLeaseDuration,
-    //             Maintenance : Maintenance,
-    //             Terms : Terms,  
-    //             PrimaryNumber : PrimaryNumber,
-    //             SecondaryNumber : SecondaryNumber,
-    //             csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val()
-    //         },
-    //         success:function(){
-    //             alert("Your Property is Posted Successfully😊")
-    //         },
-    //         error:function(){
-    //             alert("Sorry something went Wrong😖");
-    //         }
+        const formData = new FormData();
+        formData.append('BhkType', BhkTypeInput.value);
+        formData.append('Floor', FloorInput.value);
+        formData.append('HouseType', HouseTypeInput.value);
+        formData.append('Parking', ParkingInput.value);
+        formData.append('Terrace', TerraceInput.value);
+        formData.append('Hall', HallInput.value);
+        formData.append('Bedroom', BedroomInput.value);
+        formData.append('Bathroom', BathroomInput.value);
+        formData.append('District', DistrictInput.value);
+        formData.append('Town', TownInput.value);
+        formData.append('Street', StreetInput.value);
+        formData.append('ExpectedLease', ExpectedLeaseInput.value);
+        formData.append('ExpectedLeaseDuration', ExpectedLeaseDurationInput.value);
+        formData.append('Maintenance', MaintenanceInput.value);
+        formData.append('Terms', TermsInput.value);
+        formData.append('PrimaryNumber', PrimaryNumberInput.value);
+        formData.append('SecondaryNumber', SecondaryNumberInput.value);
 
-    //     });
-    // }
+        //Append files if selected
+        let images = $('#imageInput')[0].files;
+        if (images.length > 0) {
+            for (let i = 0; i < images.length; i++) {
+                formData.append('images', images[i]);
+            }
+        }
 
-}
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        fetch("residential_lease_create/", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": csrftoken,
+            },
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    window.location.href = "/profile";
+                } else {
+                    alert(data.message);
+                    window.location.href = "/profile";
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred. Please try again.");
+            });
+
+    });
+});

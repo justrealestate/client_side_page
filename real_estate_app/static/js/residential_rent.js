@@ -5,13 +5,6 @@ function RentCalculator() {
 
 }
 
-function RentCalculator() {
-  let ExpectedRent = parseInt(document.getElementById('ExpectedRent').value);
-  let ExpectedDepositMonths = parseInt(document.getElementById('ExpectedDepositMonths').value);
-  document.getElementById('ExpectedDeposit').value = ExpectedRent * ExpectedDepositMonths;
-
-}
-
 document.addEventListener("DOMContentLoaded", function () {
   const residentialRentForm = document.getElementById("residentialRentForm");
 

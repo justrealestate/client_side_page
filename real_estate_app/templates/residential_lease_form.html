@@ -4,7 +4,7 @@
 {% block content %}
 <script src="{% static 'js/residential_lease.js' %}"></script>
 <div class="container">
-    <form class="form" action="residential_lease_create/" method="POST">
+    <form class="form" id="residentialLeaseForm" enctype="multipart/form-data">
         <h3 class="alert alert-warning">Residential Lease</h3>
         <!-- Property Details Start -->
         {% csrf_token %}
@@ -232,10 +232,10 @@
             </div>
         </div>
         <hr>
-        
+
         <h4 class="alert alert-primary">Upload Images</h4>
         <div class="input-group mb-3">
-            <input type="file" class="form-control" name="images" id="Images" multiple accept="image/*">
+            <input type="file" class="form-control" name="images" id="imageInput" multiple accept="image/*">
             <label class="input-group-text btn btn-primary" for="Images">Upload</label>
         </div>
         <hr>
@@ -263,7 +263,7 @@
         <hr>
         <div class="row">
             <div class="col-md-12">
-                <button type="submit" class="btn btn-primary" onclick="ResidentialLeaseCreate()">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
 
