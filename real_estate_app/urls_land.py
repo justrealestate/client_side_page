@@ -12,7 +12,7 @@ urlpatterns = [
     path('land_lease_create/',databases.land_lease_create,name="land_lease_create"),
     #viewed
     path('land_properties_show',show_properties.land_properties_show,name='land_properties_show'),
-    path('land_view/<id>',show_properties.land_view, name='land_view'),
+    path('land_view/<property_id>',show_properties.land_view, name='land_view'),
 
     
 ]

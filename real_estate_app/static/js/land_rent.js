@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let PrimaryNumberInput = document.getElementById('PrimaryNumber');
         let SecondaryNumberInput = document.getElementById('SecondaryNumber');
 
-        alert(LengthInput.value);
+        
         const formData = new FormData();
         formData.append('Length', LengthInput.value);
         formData.append('Width', WidthInput.value);
@@ -92,11 +92,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 
-    document.querySelectorAll('.view').forEach(function (element) {
-        element.addEventListener('click', function () {
-            var id = this.getAttribute('name');
-            window.location.href = "land_view/" + id;
-        });
-    });
+    // document.querySelectorAll('.view').forEach(function (element) {
+    //     element.addEventListener('click', function () {
+    //         var id = this.getAttribute('name');
+    //         window.location.href = "land_view/" + id;
+    //     });
+    // });
 });
 

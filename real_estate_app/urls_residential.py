@@ -1,5 +1,5 @@
 from django.urls import path
-from . import databases,views
+from . import databases,views,show_properties
 
 urlpatterns = [
     path('residential_rent_form',views.residential_rent_form ,name='residential_rent_form'),
@@ -12,6 +12,6 @@ urlpatterns = [
     path('residential_lease_create/',databases.residential_lease_create,name="residential_lease_create"),
 
     #Views
-    path('residential_properties_show',views.residential_properties_show,name='residential_properties_show'),
+    path('residential_properties_show',show_properties.residential_properties_show,name='residential_properties_show'),
 
 ]

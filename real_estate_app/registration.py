@@ -1,9 +1,14 @@
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from .models import *
-import datetime
+from datetime import datetime 
+import random
 
-x = datetime.datetime.now()
+
+num = str(random.randint(1000, 9999))
+customer_month = str(datetime.now().month)
+customer_year = str(datetime.now().year)
+
 
 
 def signup(request):
@@ -12,17 +17,17 @@ def signup(request):
 def signup_verification(request):
     if request.method == 'POST':
         username = request.POST.get('username')
-        emailid = request.POST.get('email')
+        email = request.POST.get('email')
         password = request.POST.get('password')
-        customer_id = 'sample123'    
+        customer_id = 'CUS' + num + customer_month + customer_year   
         
-        if SignupDetails.objects.raw('SELECT * FROM signup_details WHERE Email = %s',[emailid]):
+        if SignupDetails.objects.filter(Email = email):
             return JsonResponse({'success': False, 'message': 'Username already exists'}, status=409)
         
         else:
             signup = SignupDetails(
                 Username = username,
-                Email = emailid,
+                Email = email,
                 Password = password,
                 Customer_id =  customer_id
             )
@@ -45,7 +50,7 @@ def login_verification(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        check = SignupDetails.objects.raw('SELECT * FROM signup_details WHERE Email =%s && Password =%s',[email,password])
+        check = SignupDetails.objects.filter(Email = email,Password = password)
         if check:
             login = LoginDetails(
                 Email = email,
@@ -53,6 +58,7 @@ def login_verification(request):
             )
             login.save()
             request.session['email'] = email
+            request.session['customer_id'] = 'CUS9379112024'
             return JsonResponse({'success': True, 'message': 'Login successful'}, status=200)
         
         else:

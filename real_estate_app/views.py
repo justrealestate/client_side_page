@@ -9,8 +9,7 @@ def base(request):
     }
     return render(request,'base.html',content)
 
-def residential_properties_show(request):
-    return render(request,"residential_properties_show.html")
+
 
 def welcome(request):
     return render(request,"welcome.html")

@@ -1,10 +1,14 @@
 from django.shortcuts import render,redirect 
 from django.http import JsonResponse
 from .models import *
-import datetime
+from datetime import datetime
+import random
 
 
-x = datetime.datetime.now()
+num = str(random.randint(1000, 9999))
+property_month = str(datetime.now().month)
+property_year = str(datetime.now().year)
+property_registration = num + property_month + property_year
 
 
 def land_rent_create(request):  
@@ -20,8 +24,8 @@ def land_rent_create(request):
             
             for image in images:
                 land_rent = LandRent(
-                        Property_Id = '',
-                        Customer_Id = '',
+                        Property_Id = 'LRE' + property_registration,
+                        Customer_Id = request.session['customer_id'],
                         Email = request.session['email'],
                         Length = request.POST.get('Length'), 
                         Width = request.POST.get('Width'),
@@ -41,7 +45,8 @@ def land_rent_create(request):
                     )
                 land_rent.save()
                 land = Land(
-                        Property_Id = '',
+                        Property_Id = 'LRE' + property_registration,
+                        Customer_Id = 'testing',
                         Email = request.session['email'],
                         Length=request.POST.get('Length'), 
                         Width = request.POST.get('Width'),
@@ -72,93 +77,131 @@ def land_rent_create(request):
     
 def land_resale_create(request):
     if request.method == 'POST':
-        land_resale = LandResale(
-            Customer_Id = '',
-            Property_Id = 'LRES',
-            Email = request.session['email'],
-            Length = request.POST.get('Length'), 
-            Width = request.POST.get('Width'),
-            PlotArea = request.POST.get('PlotArea'),
-            Cent = request.POST.get('Cent'),
-            Acre = request.POST.get('Acre'),
-            District = request.POST.get('District'),
-            Town = request.POST.get('Town'),
-            Street = request.POST.get('Street'),
-            PricePerCent = request.POST.get('PricePerCent'),
-            TotalPrice = request.POST.get('TotalPrice'),
-            PricePerSquareFeet = request.POST.get('PricePerSquareFeet'),
-            Description = request.POST.get('Description'),
-            PrimaryNumber = request.POST.get('PrimaryNumber'),
-            SecondaryNumber = request.POST.get('SecondaryNumber')
-        )
+        try:
+            # Retrieve images from request
+            images = request.FILES.getlist('images')
+            email = request.session.get('email')  # Safely retrieve email from session
+            
+            # Check if essential session keys and post data exist
+            if not email or not images:
+                return JsonResponse({"error": "Missing session or file data."}, status=400)
+            for image in images:
+                land_resale = LandResale(
+                    Customer_Id = request.session['customer_id'],
+                    Property_Id = 'LRES' + property_registration,
+                    Email = request.session['email'],
+                    Length = request.POST.get('Length'), 
+                    Width = request.POST.get('Width'),
+                    PlotArea = request.POST.get('PlotArea'),
+                    Cent = request.POST.get('Cent'),
+                    Acre = request.POST.get('Acre'),
+                    District = request.POST.get('District'),
+                    Town = request.POST.get('Town'),
+                    Street = request.POST.get('Street'),
+                    PricePerCent = request.POST.get('PricePerCent'),
+                    TotalPrice = request.POST.get('TotalPrice'),
+                    PricePerSquareFeet = request.POST.get('PricePerSquareFeet'),
+                    Description = request.POST.get('Description'),
+                    Image = image,
+                    PrimaryNumber = request.POST.get('PrimaryNumber'),
+                    SecondaryNumber = request.POST.get('SecondaryNumber')
+                )
+                land_resale.save()
+                land = Land(
+                    Customer_Id = request.session['customer_id'],
+                    Property_Id = 'LRES' + property_registration,
+                    Email = request.session['email'],
+                    Length = request.POST.get('Length'), 
+                    Width = request.POST.get('Width'),
+                    PlotArea = request.POST.get('PlotArea'),
+                    Cent = request.POST.get('Cent'),
+                    Acre = request.POST.get('Acre'),
+                    District = request.POST.get('District'),
+                    Town = request.POST.get('Town'),
+                    Street = request.POST.get('Street'),
+                    PricePerCent = request.POST.get('PricePerCent'),
+                    TotalPrice = request.POST.get('TotalPrice'),
+                    PricePerSquareFeet = request.POST.get('PricePerSquareFeet'),
+                    Description = request.POST.get('Description'),
+                    Type = 'Resale',
+                    Image = image,
+                    PrimaryNumber = request.POST.get('PrimaryNumber'),
+                    SecondaryNumber = request.POST.get('SecondaryNumber')
+                )
+                
+                land.save()
+            return JsonResponse({"message": "Land Resale created successfully."}, status=201)
 
-        land = Land(
-            Property_Id = '',
-            Email = request.session['email'],
-            Length = request.POST.get('Length'), 
-            Width = request.POST.get('Width'),
-            PlotArea = request.POST.get('PlotArea'),
-            Cent = request.POST.get('Cent'),
-            Acre = request.POST.get('Acre'),
-            District = request.POST.get('District'),
-            Town = request.POST.get('Town'),
-            Street = request.POST.get('Street'),
-            PricePerCent = request.POST.get('PricePerCent'),
-            TotalPrice = request.POST.get('TotalPrice'),
-            PricePerSquareFeet = request.POST.get('PricePerSquareFeet'),
-            Description = request.POST.get('Description'),
-            Type = 'Resale',
-            PrimaryNumber = request.POST.get('PrimaryNumber'),
-            SecondaryNumber = request.POST.get('SecondaryNumber')
-        )
-        land_resale.save()
-        land.save()
-        return redirect('/')
+        except Exception as e:
+            # Log or handle the exception as needed
+            return JsonResponse({"error": str(e)}, status=500)
+    
+    return JsonResponse({"message": "Error"},status=400)
+        
     
 
 def land_lease_create(request):
     if request.method == 'POST':
-        land_lease = LandLease(
-            Property_Id = '',
-            Email = request.session['email'],
-            Length=request.POST.get('Length'), 
-            Width = request.POST.get('Width'),
-            PlotArea = request.POST.get('PlotArea'),
-            Cent = request.POST.get('Cent'),
-            Acre = request.POST.get('Acre'),
-            District = request.POST.get('District'),
-            Town = request.POST.get('Town'),
-            Street = request.POST.get('Street'),
-            ExpectedLease = request.POST.get('ExpectedLease'),
-            ExpectedLeaseDuration = request.POST.get('ExpectedLeaseDuration'),
-            Maintenance = request.POST.get('Maintenance'),
-            Terms = request.POST.get('Terms'),
-            PrimaryNumber = request.POST.get('PrimaryNumber'),
-            SecondaryNumber = request.POST.get('SecondaryNumber')
-        )
+        try:
+            # Retrieve images from request
+            images = request.FILES.getlist('images')
+            email = request.session.get('email')  # Safely retrieve email from session
+            
+            # Check if essential session keys and post data exist
+            if not email or not images:
+                return JsonResponse({"error": "Missing session or file data."}, status=400)
+            for image in images:
+                land_lease = LandLease(
+                    Property_Id = 'LL' + property_registration,
+                    Customer_Id = 'rt',
+                    Email = request.session['email'],
+                    Length=request.POST.get('Length'), 
+                    Width = request.POST.get('Width'),
+                    PlotArea = request.POST.get('PlotArea'),
+                    Cent = request.POST.get('Cent'),
+                    Acre = request.POST.get('Acre'),
+                    District = request.POST.get('District'),
+                    Town = request.POST.get('Town'),
+                    Street = request.POST.get('Street'),
+                    ExpectedLease = request.POST.get('ExpectedLease'),
+                    ExpectedLeaseDuration = request.POST.get('ExpectedLeaseDuration'),
+                    Maintenance = request.POST.get('Maintenance'),
+                    Terms = request.POST.get('Terms'),
+                    Image = image,
+                    PrimaryNumber = request.POST.get('PrimaryNumber'),
+                    SecondaryNumber = request.POST.get('SecondaryNumber')
+                )
+                land_lease.save()
+                land = Land(
+                    Property_Id = 'LL' + property_registration,
+                    Customer_Id = 'rt',
+                    Email = request.session['email'],
+                    Length=request.POST.get('Length'), 
+                    Width = request.POST.get('Width'),
+                    PlotArea = request.POST.get('PlotArea'),
+                    Cent = request.POST.get('Cent'),
+                    Acre = request.POST.get('Acre'),
+                    District = request.POST.get('District'),
+                    Town = request.POST.get('Town'),
+                    Street = request.POST.get('Street'),
+                    ExpectedLease = request.POST.get('ExpectedLease'),
+                    ExpectedLeaseDuration = request.POST.get('ExpectedLeaseDuration'),
+                    Maintenance = request.POST.get('Maintenance'),
+                    Terms = request.POST.get('Terms'),
+                    Type = 'Lease',
+                    Image = image,
+                    PrimaryNumber = request.POST.get('PrimaryNumber'),
+                    SecondaryNumber = request.POST.get('SecondaryNumber')
+                )
+                land.save()
+            return JsonResponse({"message": "Land Lease created successfully."}, status=201)
 
-        land = Land(
-            Property_Id = '',
-            Email = request.session['email'],
-            Length=request.POST.get('Length'), 
-            Width = request.POST.get('Width'),
-            PlotArea = request.POST.get('PlotArea'),
-            Cent = request.POST.get('Cent'),
-            Acre = request.POST.get('Acre'),
-            District = request.POST.get('District'),
-            Town = request.POST.get('Town'),
-            Street = request.POST.get('Street'),
-            ExpectedLease = request.POST.get('ExpectedLease'),
-            ExpectedLeaseDuration = request.POST.get('ExpectedLeaseDuration'),
-            Maintenance = request.POST.get('Maintenance'),
-            Terms = request.POST.get('Terms'),
-            Type = 'Lease',
-            PrimaryNumber = request.POST.get('PrimaryNumber'),
-            SecondaryNumber = request.POST.get('SecondaryNumber')
-        )
-        land_lease.save()
-        land.save()
-        return redirect('/')
+        except Exception as e:
+            # Log or handle the exception as needed
+            return JsonResponse({"error": str(e)}, status=500)
+    
+    return JsonResponse({"message": "Error"},status=400)
+        
     
 def residential_rent_create(request):
     if request.method == 'POST':
@@ -174,8 +217,8 @@ def residential_rent_create(request):
             # Create and save ResidentialRent objects for each image
             for image in images:
                 residential_rent = ResidentialRent(
-                    Customer_Id='prakash1234',
-                    Property_Id='testing',
+                    Customer_Id = 'prakash1234',
+                    Property_Id = 'RRE' + property_registration,
                     Email=email,
                     BhkType=request.POST.get('BhkType'),
                     Floor=request.POST.get('Floor'),
@@ -203,7 +246,7 @@ def residential_rent_create(request):
             # Create and save a single Residential object with details
                 residential = Residential(
                     Customer_Id='prakash1234',
-                    Property_Id='testing',
+                    Property_Id='RRE' + property_registration,
                     Email=email,
                     BhkType=request.POST.get('BhkType'),
                     Floor=request.POST.get('Floor'),
@@ -253,7 +296,7 @@ def residential_resale_create(request):
             for image in images:
                 residential_resale = ResidentialResale(
                         Customer_Id='prakash1234',
-                        Property_Id='testing',
+                        Property_Id='RRES' + property_registration,
                         Email = request.session['email'],
                         BhkType = request.POST.get('BhkType'),
                         TotalFloor = request.POST.get('TotalFloor'),
@@ -283,7 +326,7 @@ def residential_resale_create(request):
                 residential_resale.save()
                 residential = Residential(
                         Customer_Id='prakash1234',
-                        Property_Id='testing',
+                        Property_Id='RRES' + property_registration,
                         Email = request.session['email'],
                         BhkType = request.POST.get('BhkType'),
                         TotalFloor = request.POST.get('TotalFloor'),
@@ -335,7 +378,7 @@ def residential_lease_create(request):
             for image in images:
                 residential_lease = ResidentialLease(
                     Customer_Id='prakash1234',
-                    Property_Id='testing',
+                    Property_Id='RL' + property_registration,
                     Email = request.session['email'],
                     BhkType = request.POST.get('BhkType'),
                     Floor = request.POST.get('Floor'),
@@ -359,7 +402,7 @@ def residential_lease_create(request):
                 residential_lease.save()
                 residential = Residential(
                     Customer_Id='prakash1234',
-                    Property_Id='testing',
+                    Property_Id='RL' + property_registration,
                     Email = request.session['email'],
                     BhkType = request.POST.get('BhkType'),
                     Floor = request.POST.get('Floor'),
